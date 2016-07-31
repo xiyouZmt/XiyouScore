@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="jobs">
+        <item>产品运营</item>
+        <item>前段设计</item>
+        <item>后台开发</item>
+        <item>视觉设计</item>
+        <item>产品设计</item>
+        <item>客户端开发</item>
+    </string-array>
+
+</resources>

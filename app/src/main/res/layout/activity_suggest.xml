@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolBar_layout"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/suggestText_a"
+        android:text="问题反馈"
+        android:textSize="12sp"
+        android:textColor="@color/color_000000"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/suggestText_a"
+        android:id="@+id/suggestRelative"
+        android:background="@drawable/shape">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/suggest_content"
+            android:hint="请留下您的宝贵意见,我们将不断完善,谢谢!"
+            android:textColorHint="@color/color_111111"
+            android:textSize="12sp"
+            android:textStyle="italic"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/suggestRelative"
+        android:id="@+id/suggestText_b"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="联系方式"
+        android:textSize="12sp"
+        android:textColor="@color/color_000000" />
+
+    <com.zmt.boxin.Utils.ClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/suggestText_b"
+        android:id="@+id/suggest_number"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:hint="QQ号或手机号,仅用于跟您确认问题"
+        android:textColorHint="@color/color_111111"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/sendSuggest"
+        android:text="发送"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/login"/>
+
+</RelativeLayout>

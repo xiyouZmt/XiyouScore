@@ -1,0 +1,240 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee">
+
+    <com.zmt.boxin.Utils.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8px"
+                android:paddingBottom="26px"
+                android:id="@+id/my_run"
+                android:background="@color/color_fafafa">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16px"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/mileage"
+                    android:text="82.32"
+                    android:textSize="45sp"
+                    android:textColor="@color/color_03a9f4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_alignBottom="@id/mileage"
+                    android:layout_toLeftOf="@+id/mileage"
+                    android:layout_marginRight="26px"
+                    android:text="@string/mileage"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_212121"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_alignBottom="@id/mileage"
+                    android:layout_toRightOf="@+id/mileage"
+                    android:layout_marginLeft="26px"
+                    android:text="@string/km"
+                    android:textSize="14sp"
+
+                    android:textColor="@color/color_212121"/>
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mileage"
+                    android:layout_marginTop="26px"
+                    android:orientation="horizontal">
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/run_count"
+                            android:text="10"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_212121"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/run_count"
+                            android:layout_marginTop="10px"
+                            android:text="次"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_212121"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/run_count"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/join"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_212121"/>
+
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/run_time"
+                            android:text="8"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_212121"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/run_time"
+                            android:layout_marginTop="10px"
+                            android:text="h"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_212121"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/run_time"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/time"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_212121"/>
+
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/friends"
+                            android:text="15"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_212121"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/friends"
+                            android:layout_marginTop="10px"
+                            android:text="人"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_212121"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/friends"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/friends"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_212121"/>
+
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52px"
+                android:layout_below="@+id/my_run"
+                android:id="@+id/text_myRun"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="2px"
+                    android:layout_height="20px"
+                    android:layout_marginLeft="16px"
+                    android:layout_marginRight="16px"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/color_03a9f4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/my_makeRun"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_757575"/>
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_myRun"
+                android:scrollbars="vertical"
+                android:id="@+id/aRecyclerView">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52px"
+                android:layout_below="@+id/aRecyclerView"
+                android:id="@+id/text_run"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="2px"
+                    android:layout_height="16px"
+                    android:layout_marginLeft="16px"
+                    android:layout_marginRight="16px"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/color_03a9f4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/run_together"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_757575"/>
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_run"
+                android:id="@+id/bRecyclerView"
+                android:scrollbars="vertical">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+    </com.zmt.boxin.Utils.MyScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

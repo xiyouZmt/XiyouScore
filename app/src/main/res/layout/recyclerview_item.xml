@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.zmt.boxin.Utils.CircleImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:id="@+id/circleImage"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/circleImage"
+        android:layout_toRightOf="@+id/circleImage"
+        android:id="@+id/run_name"
+        android:text="来约跑啊"
+        android:textSize="20sp"
+        android:textColor="@color/color_212121" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/run_name"
+        android:layout_alignLeft="@+id/run_name"
+        android:layout_marginTop="20dp"
+        android:id="@+id/run_time"
+        android:text="17:00"
+        android:textSize="16sp"
+        android:textColor="@color/color_757575"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/run_time"
+        android:layout_alignLeft="@+id/run_time"
+        android:layout_marginTop="20dp"
+        android:id="@+id/run_place"
+        android:text="东区操场"
+        android:textSize="16sp"
+        android:textColor="@color/color_757575"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/run_time"
+        android:layout_toRightOf="@+id/run_time"
+        android:layout_marginLeft="72dp"
+        android:id="@+id/run_target"
+        android:text="3km"
+        android:textSize="16sp"
+        android:textColor="@color/color_757575" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/run_target"
+        android:layout_alignLeft="@+id/run_target"
+        android:layout_marginTop="20dp"
+        android:id="@+id/run_num"
+        android:text="东区操场"
+        android:textSize="16sp"
+        android:textColor="@color/color_757575"/>
+
+</RelativeLayout>

@@ -2,67 +2,83 @@ package com.zmt.boxin.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.zmt.boxin.Adapter.FailedPassAdapter;
+import com.zmt.boxin.Adapter.ScoreAdapter;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.R;
-import com.zmt.boxin.RecyclerAdapter.RecyclerViewAdapter;
-import com.zmt.boxin.Utils.SpaceItemDecoration;
+import com.zmt.boxin.Utils.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
-public class ScoreActivity extends AppCompatActivity implements RecyclerViewAdapter.OnItemClickListener{
+public class ScoreActivity extends AppCompatActivity {
 
     private App app;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.toolBar)
     Toolbar toolbar;
-    @BindView(R.id.termRecycler)
-    RecyclerView termRecycler;
-    RecyclerViewAdapter adapter;
+    @BindViews({R.id.dropDownMenu1, R.id.dropDownMenu2, R.id.dropDownMenu3, R.id.dropDownMenu4,
+            R.id.dropDownMenu5, R.id.dropDownMenu6, R.id.dropDownMenu7, R.id.dropDownMenu8})
+    DropDownMenu[] dropDownMenu;
+    @BindView(R.id.failedPass)
+    LinearLayout failedPass;
+    @BindView(R.id.failedPassList)
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+        ButterKnife.bind(this);
         initViews();
     }
 
-    public void initViews(){
+    public void initViews() {
         app = (App) getApplication();
         ButterKnife.bind(this);
         title.setText(R.string.score);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        adapter = new RecyclerViewAdapter(app.getUser().getTermList());
-        adapter.addOnItemClickListener(this);
-        LinearLayoutManager manager = new LinearLayoutManager(
-                this, LinearLayoutManager.VERTICAL, false);
-        termRecycler.setLayoutManager(manager);
         /**
-         * item间距
+         * 成绩详情
          */
-        termRecycler.addItemDecoration(new SpaceItemDecoration(
-                ScoreActivity.this, SpaceItemDecoration.VERTICAL_LIST));
-        termRecycler.setAdapter(adapter);
-    }
-
-    @Override
-    public void OnItemClick(View view, int position) {
-
+        for (int i = 0; i < app.getUser().getTermList().size(); i++) {
+            /**
+             * 学期
+             */
+            List<String> termList = new ArrayList<>();
+            termList.add(app.getUser().getTermList().get(i));
+            /**
+             * 成绩列表
+             */
+            List<View> viewList = new ArrayList<>();
+            ListView listView = new ListView(this);
+            listView.setDividerHeight(0);
+            ScoreAdapter scoreAdapter = new ScoreAdapter(this, app.getUser().getScoreList().get(i));
+            listView.setAdapter(scoreAdapter);
+            viewList.add(listView);
+            dropDownMenu[i].setVisibility(View.VISIBLE);
+            dropDownMenu[i].setDropDownMenu(termList, viewList);
+        }
+        if (app.getUser().getFailedPass().size() != 0) {
+            failedPass.setVisibility(View.VISIBLE);
+            FailedPassAdapter adapter = new FailedPassAdapter(this, app.getUser().getFailedPass());
+            listView.setAdapter(adapter);
+        }
     }
 
     @Override

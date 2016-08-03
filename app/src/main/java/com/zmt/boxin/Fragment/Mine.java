@@ -19,17 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.zmt.boxin.Activity.MessageActivity;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.SaveImage;
-import com.zmt.boxin.NetworkThread.ScoreThread;
+import com.zmt.boxin.NetworkThread.TermThread;
 import com.zmt.boxin.R;
 import com.zmt.boxin.Activity.ScoreActivity;
 import com.zmt.boxin.Utils.CircleImageView;
-import com.zmt.boxin.Utils.OkHttpUtils;
 import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
@@ -69,9 +65,11 @@ public class Mine extends android.support.v4.app.Fragment {
             switch (msg.obj.toString()){
                 case "fail" :
                 case "error" :
+                    progressDialog.dismiss();
                     Snackbar.make(coordinatorLayout, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
                     break;
                 case "no evaluate" :
+                    progressDialog.dismiss();
                     Toast.makeText(getActivity(), "你还没有对本学期的课程进行评价, 请先评价", Toast.LENGTH_SHORT).show();
                     intent.setClass(getActivity(), com.zmt.boxin.Activity.WebView.class);
                     startActivity(intent);
@@ -83,12 +81,12 @@ public class Mine extends android.support.v4.app.Fragment {
                         myImage.setImageBitmap(bitmap);
                     }
                     break;
-                case "term is ok" :
+                case "score is ok" :
                     Bundle bundle =  msg.getData();
                     if(bundle != null){
                         for (int i = 0; i < bundle.size(); i++) {
                             Object term;
-                            if((term = bundle.get("term" + i)) != null){
+                            if((term = bundle.get("year" + i)) != null){
                                 String term2 = term + "学年第2学期学习成绩";
                                 String term1 = term + "学年第1学期学习成绩";
                                 app.getUser().getTermList().add(term2);
@@ -121,10 +119,11 @@ public class Mine extends android.support.v4.app.Fragment {
             case R.id.run_note :
                 break;
             case R.id.score :
-                if(app.getUser().getTermList().size() == 0) {
+                if(app.getUser().getTermList().size() == 0 ||
+                        app.getUser().getScoreList().size() == 0) {
                     progressDialog.show();
-                    RequestUrl url = new RequestUrl(app.getUser().getNumber());
-                    ScoreThread scoreThread = new ScoreThread(url.getScoreUrl(), handler, app);
+                    RequestUrl url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
+                    TermThread scoreThread = new TermThread(getActivity(), url.getScoreUrl(), handler, app);
                     Thread t = new Thread(scoreThread, "scoreThread");
                     t.start();
                 } else {

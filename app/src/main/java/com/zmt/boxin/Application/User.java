@@ -2,7 +2,9 @@ package com.zmt.boxin.Application;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Dangelo on 2016/7/29.
@@ -17,11 +19,33 @@ public class User implements Serializable {
     private String classes;
     private String imageUrl;
     private String Cookie;
+    private String scoreValue;
+
+    public void setScoreValue(String scoreValue) {
+        this.scoreValue = scoreValue;
+    }
+
+    public String getScoreValue() {
+
+        return scoreValue;
+    }
 
     private List<String> termList = new ArrayList<>();
 
+    private List< Map<String, String> > failedPass = new ArrayList<>();
+
+    private List< List<Map<String, String>> > scoreList = new ArrayList<>();
+
     public List<String> getTermList() {
         return termList;
+    }
+
+    public List<Map<String, String>> getFailedPass() {
+        return failedPass;
+    }
+
+    public List< List<Map<String, String>> > getScoreList() {
+        return scoreList;
     }
 
     public String getCookie() {

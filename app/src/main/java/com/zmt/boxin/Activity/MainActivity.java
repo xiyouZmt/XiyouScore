@@ -1,5 +1,6 @@
 package com.zmt.boxin.Activity;
 
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhy.autolayout.AutoLayoutActivity;
+import com.zmt.boxin.Application.App;
 import com.zmt.boxin.Fragment.MakeRun;
 import com.zmt.boxin.Fragment.ChooseCourse;
 import com.zmt.boxin.Fragment.Courses;
@@ -52,6 +54,7 @@ public class MainActivity extends AutoLayoutActivity {
     @BindView(R.id.viewPager) ViewPager viewPager;
     @BindView(R.id.container) CoordinatorLayout coordinatorLayout;
 
+    private App app;
     private List<Fragment> fragmentList;
     private long exitTime = 0;
 
@@ -155,6 +158,7 @@ public class MainActivity extends AutoLayoutActivity {
 
     public void initViews(){
         ButterKnife.bind(this);
+        app = (App)getApplication();
         fragmentList = new ArrayList<>();
         Courses courses = new Courses();
         Run run = new Run();
@@ -200,6 +204,9 @@ public class MainActivity extends AutoLayoutActivity {
                 exitTime = System.currentTimeMillis();
             } else  {
                 finish();
+                app.getUser().getTermList().clear();
+                app.getUser().getScoreList().clear();
+                app.getUser().getFailedPass().clear();
             }
             return true;
         }

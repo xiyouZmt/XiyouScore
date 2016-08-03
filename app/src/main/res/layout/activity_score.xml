@@ -1,4 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,13 +10,375 @@
 
     <include layout="@layout/toolbar_layout"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/termRecycler"
-        android:scrollbars="vertical">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:fillViewport="true">-->
 
-    </android.support.v7.widget.RecyclerView>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu1"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu2"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu3"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu4"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu5"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu6"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu7"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<com.zmt.boxin.Utils.DropDownMenu-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:id="@+id/dropDownMenu8"-->
+                <!--app:ddmenuTextSize="13sp"-->
+                <!--app:ddtextUnselectedColor="@color/color_111111"-->
+                <!--app:ddtextSelectedColor="@color/color_7b1fa2"-->
+                <!--app:dddividerColor="#dddddd"-->
+                <!--app:ddunderlineColor="#dddddd"-->
+                <!--app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"-->
+                <!--app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"-->
+                <!--app:ddmenuBackgroundColor="@color/color_fafafa"-->
+                <!--app:ddmaskColor="@color/color_eeeeee"-->
+                <!--android:visibility="gone"/>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:id="@+id/failedPass"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="30dp"-->
+                    <!--android:text="@string/failedPass"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:textColor="@color/color_212121"-->
+                    <!--android:textStyle="bold"/>-->
+
+                <!--<ListView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginRight="16dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:id="@+id/failedPassList"-->
+                    <!--android:background="@color/color_fafafa"-->
+                    <!--android:dividerHeight="0.5dp"-->
+                    <!--android:divider="@color/color_dddddd">-->
+
+                <!--</ListView>-->
+
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+    <!--</ScrollView>-->
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu1"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu2"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu3"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu4"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu5"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu6"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu7"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <com.zmt.boxin.Utils.DropDownMenu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/dropDownMenu8"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/color_111111"
+        app:ddtextSelectedColor="@color/color_7b1fa2"
+        app:dddividerColor="#dddddd"
+        app:ddunderlineColor="#dddddd"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        app:ddmenuBackgroundColor="@color/color_fafafa"
+        app:ddmaskColor="@color/color_eeeeee"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:id="@+id/failedPass"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="@string/failedPass"
+            android:textSize="16sp"
+            android:textColor="@color/color_212121"
+            android:textStyle="bold"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/failedPassList"
+            android:background="@color/color_fafafa"
+            android:dividerHeight="0.5dp"
+            android:divider="@color/color_dddddd">
+
+        </ListView>
+
+    </LinearLayout>
 
 </LinearLayout>

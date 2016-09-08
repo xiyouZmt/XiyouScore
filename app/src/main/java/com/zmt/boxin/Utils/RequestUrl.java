@@ -52,9 +52,9 @@ public class RequestUrl {
     public String scoreUrl = IP + "xscjcx.aspx?xh=";
 
     /**
-     * 照片
+     * 图片
      */
-    public String imageUrl = IP + "readimagexs.aspx?xh=";
+    public String imageUrl;
 
     public String getName() {
         return name;
@@ -76,8 +76,8 @@ public class RequestUrl {
         return messageUrl + number + "&xm=" + name + "&gnmkdm=N121501";
     }
 
-    public String getImageUrl(){
-        return imageUrl + number;
+    public String getIP(){
+        return IP;
     }
 
     public String getScoreUrl() {

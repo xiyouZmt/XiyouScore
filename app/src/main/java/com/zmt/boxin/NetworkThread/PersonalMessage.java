@@ -51,13 +51,15 @@ public class PersonalMessage implements Runnable{
                 Element colleague = document.getElementById("lbl_xy");  //学院
                 Element major = document.getElementById("lbl_zymc");    //专业
                 Element classes = document.getElementById("lbl_xzb");   //班级
+                Element imageUrl = document.getElementById("xszp");     //图片
+                String imageSuffix = imageUrl.attr("src");
                 app.getUser().setNumber(number.text());
                 app.getUser().setName(name.text());
                 app.getUser().setSex(sex.text());
                 app.getUser().setColleague(colleague.text());
                 app.getUser().setMajor(major.text());
                 app.getUser().setClasses(classes.text());
-                app.getUser().setImageUrl(new RequestUrl(app.getUser().getNumber()).getImageUrl());
+                app.getUser().setImageUrl(new RequestUrl().getIP() + imageSuffix);
                 msg.obj = courses;
                 handler.sendMessage(msg);
                 break;

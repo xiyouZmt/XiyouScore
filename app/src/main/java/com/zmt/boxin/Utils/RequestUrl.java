@@ -22,9 +22,14 @@ public class RequestUrl {
     public final String IP = "http://222.24.19.201/";
 
     /**
+     * 获取验证码
+     */
+    public final String identifyCode = IP + "CheckCode.aspx";
+
+    /**
      * 登陆，获取session
      */
-    public final String cookieUrl = IP + "default4.aspx";
+    public final String cookieUrl = IP + "default2.aspx";
 
     /**
      * 正方首页
@@ -53,6 +58,10 @@ public class RequestUrl {
 
     public String getName() {
         return name;
+    }
+
+    public String getIdentifyCode() {
+        return identifyCode;
     }
 
     public String getHomeUrl() {

@@ -4,8 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
@@ -18,10 +22,12 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.GetSession;
+import com.zmt.boxin.NetworkThread.IdentifyThread;
 import com.zmt.boxin.R;
 import com.zmt.boxin.Utils.ClearEditText;
 import com.zmt.boxin.Utils.IsConnected;
@@ -39,8 +45,14 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.username) ClearEditText username;
     @BindView(R.id.password) PasswordEditText password;
     @BindView(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.checkCodeText) ClearEditText editText;
+    @BindView(R.id.checkCode)ImageView checkCode;
+    private String number;
+    private String pwd;
+    private String checkCodeText;
     private App app;
     private ProgressDialog progressdialog;
+    private final String rootPath = Environment.getExternalStorageDirectory() + "/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +68,13 @@ public class LoginActivity extends AppCompatActivity {
         String pwd = sharedPreferences.getString("password", "");
         username.setText(name);
         password.setText(pwd);
+        /**
+         * 获取验证码
+         */
+        RequestUrl url = new RequestUrl();
+        IdentifyThread thread = new IdentifyThread(url.getIdentifyCode(), handler, app);
+        Thread t = new Thread(thread, "IdentifyThread");
+        t.start();
     }
 
     public final Handler handler = new Handler(){
@@ -68,6 +87,11 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("content", msg.obj.toString());
                     startActivity(intent);
                     progressdialog.dismiss();
+                    break;
+                case 0x001 :
+                    String checkCodePath = rootPath + "/Boxin/Images/checkCode.png";
+                    Bitmap bitmap = BitmapFactory.decodeFile(checkCodePath);
+                    checkCode.setImageBitmap(bitmap);
                     break;
                 case 0x111 :
                     progressdialog.dismiss();
@@ -99,8 +123,9 @@ public class LoginActivity extends AppCompatActivity {
         } else if(password.getText().toString().equals("")){
             Snackbar.make(coordinatorLayout, "密码不能为空!", Snackbar.LENGTH_SHORT).show();
         } else {
-            String number = username.getText().toString();
-            String pwd = password.getText().toString();
+            number = username.getText().toString();
+            pwd = password.getText().toString();
+            checkCodeText = editText.getText().toString();
             if(checkbox.isChecked()){
                 /**
                  * 记住密码
@@ -116,13 +141,12 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 progressdialog.show();
                 RequestUrl url = new RequestUrl();
-                GetSession thread = new GetSession(url.cookieUrl, number, pwd, handler, app);
+                GetSession thread = new GetSession(url.cookieUrl, number, pwd, checkCodeText, handler, app);
                 Thread t = new Thread(thread, "NetWorkThread");
                 t.start();
             }
         }
     }
-
 
     public void initViews(){
         app = (App)getApplication();

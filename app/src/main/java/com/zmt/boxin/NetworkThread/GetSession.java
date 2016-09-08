@@ -14,20 +14,22 @@ public class GetSession implements Runnable{
     private String url;
     private String number;
     private String password;
+    private String checkCode;
     private Handler handler;
     private App app;
 
-    public GetSession(String url, String number, String password, Handler handler, App app) {
+    public GetSession(String url, String number, String password, String checkCode, Handler handler, App app) {
         this.url = url;
         this.number = number;
         this.password = password;
+        this.checkCode = checkCode;
         this.handler = handler;
         this.app = app;
     }
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url, number, password);
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, number, password, checkCode, app.getUser().getCookie());
         String result = okHttpUtils.getDataByPost();
         switch (result){
             case "error" :
@@ -43,8 +45,8 @@ public class GetSession implements Runnable{
                 app.getUser().setCookie(result);
                 app.getUser().setNumber(number);
                 RequestUrl url = new RequestUrl(number);
-                HomeThread htmlThread = new HomeThread(url.getHomeUrl(), handler, app);
-                Thread t = new Thread(htmlThread, "htmlThread");
+                HomeThread homeThread = new HomeThread(url.getHomeUrl(), handler, app);
+                Thread t = new Thread(homeThread, "htmlThread");
                 t.start();
                 break;
         }

@@ -1,4 +1,4 @@
-#XiyouCourses
+#XiyouScore
 
 请求教务系统，爬取课表，，，跟进中
 

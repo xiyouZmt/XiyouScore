@@ -1,6 +1,5 @@
 package com.zmt.boxin.NetworkThread;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,14 +22,12 @@ import java.util.Map;
  */
 public class ScoreThread implements Runnable{
 
-    private Context context;
     private App app;
     private String url;
     private Bundle termBundle;
     private Handler handler;
 
-    public ScoreThread(Context context, App app, String url, Bundle termBundle, Handler handler) {
-        this.context = context;
+    public ScoreThread(App app, String url, Bundle termBundle, Handler handler) {
         this.app = app;
         this.url = url;
         this.termBundle = termBundle;

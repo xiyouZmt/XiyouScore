@@ -21,13 +21,11 @@ import java.util.Map;
  */
 public class TermThread implements Runnable{
 
-    private Context context;
     private String url;
     private Handler handler;
     private App app;
 
-    public TermThread(Context context, String url, Handler handler, App app) {
-        this.context = context;
+    public TermThread(String url, Handler handler, App app) {
         this.url = url;
         this.handler = handler;
         this.app = app;
@@ -47,7 +45,7 @@ public class TermThread implements Runnable{
                 break;
             default :
                 Bundle bundle = getTerm(content);
-                ScoreThread scoreThread = new ScoreThread(context, app, url, bundle, handler);
+                ScoreThread scoreThread = new ScoreThread(app, url, bundle, handler);
                 Thread t = new Thread(scoreThread, "ScoreThread");
                 t.start();
 //                handler.sendMessage(msg);

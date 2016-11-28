@@ -1,6 +1,5 @@
 package com.zmt.boxin.Activity;
 
-import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,9 +18,9 @@ import android.widget.TextView;
 
 import com.zhy.autolayout.AutoLayoutActivity;
 import com.zmt.boxin.Application.App;
-import com.zmt.boxin.Fragment.MakeRun;
 import com.zmt.boxin.Fragment.ChooseCourse;
 import com.zmt.boxin.Fragment.Courses;
+import com.zmt.boxin.Fragment.MakeRun;
 import com.zmt.boxin.Fragment.Mine;
 import com.zmt.boxin.Fragment.Run;
 import com.zmt.boxin.R;
@@ -172,8 +171,8 @@ public class MainActivity extends AutoLayoutActivity {
         fragmentList.add(mine);
 //        toolbar.setNavigationIcon(R.mipmap.menu);
 //        toolbar.setLogo(R.mipmap.ic_launcher);
-//        toolbar.setTitle(getResources().getString(R.string.Boxin));
 //        toolbar.setTitleTextColor(getResources().getColor(R.color.color_fafafa));
+        toolbar.setTitle("");
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -194,6 +193,8 @@ public class MainActivity extends AutoLayoutActivity {
                 return true;
             }
         });
+        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

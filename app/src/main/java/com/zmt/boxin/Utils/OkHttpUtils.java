@@ -107,7 +107,7 @@ public class OkHttpUtils {
          * 请求体
          */
         FormEncodingBuilder builder = new FormEncodingBuilder();
-        builder.add("__VIEWSTATE", "dDwyODE2NTM0OTg7Oz4EPWKUJ7QVy9jt5geaO9kcCdS0zQ==")
+        builder.add("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz61IGQDPAm6cyppI+uTzQcI8sEH6Q==")
                 .add("txtUserName", value1)
                 .add("TextBox2", value2)
                 .add("txtSecretCode", value3)

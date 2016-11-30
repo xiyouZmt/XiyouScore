@@ -3,12 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_03a9f4</item>    <!--标题栏颜色-->
-        <item name="colorPrimaryDark">@color/color_039be5</item>    <!--状态栏颜色-->
-        <item name="colorAccent">@color/color_039be5</item>  <!--UI控件-->
-        <item name="windowActionBar">false</item>   <!--去掉ActionBar-->
-        <item name="windowNoTitle">true</item>  <!--去掉标题-->
-        <item name="android:windowTranslucentStatus">true</item>    <!--使toolBar颜色和状态栏颜色一致-->
+        <item name="colorPrimary">@color/color_03a9f4</item>
+        <!--标题栏颜色-->
+        <item name="colorPrimaryDark">@color/color_039be5</item>
+        <!--状态栏颜色-->
+        <item name="colorAccent">@color/color_039be5</item>
+        <!--UI控件-->
+        <item name="windowActionBar">false</item>
+        <!--去掉ActionBar-->
+        <item name="windowNoTitle">true</item>
+        <!--去掉标题-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--使toolBar颜色和状态栏颜色一致-->
         <item name="android:windowAnimationStyle">@style/fade</item>
         <item name="android:listDivider">@drawable/divide_line</item>
         <!--<item name="android:actionOverflowButtonStyle">@style/myOverflow</item>     &lt;!&ndash;自定义菜单项&ndash;&gt;-->
@@ -19,12 +25,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    
-    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light" />
 
     <!--<style name="myOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">-->
-        <!--<item name="android:src">@mipmap/menu_line</item>-->
+    <!--<item name="android:src">@mipmap/menu_line</item>-->
     <!--</style>-->
 
     <style name="fade" parent="@android:style/Animation.Activity">

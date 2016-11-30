@@ -22,30 +22,29 @@ import java.io.OutputStream;
 public class OkHttpUtils {
 
     private String url;
-    private String value1;
-    private String value2;
-    private String value3;
-    private String value4;
+    private String name;
+    private String number;
+    private String password;
+    private String checkCode;
+    private String cookie;
 
-    public OkHttpUtils(String url, String value1, String value2, String value3, String value4) {
+    public OkHttpUtils(String url, String number, String password, String checkCode, String cookie) {
         this.url = url;
-        this.value1 = value1;
-        this.value2 = value2;
-        this.value3 = value3;
-        this.value4 = value4;
+        this.number = number;
+        this.password = password;
+        this.checkCode = checkCode;
+        this.cookie = cookie;
     }
 
-    public OkHttpUtils(String url, String value1, String value2, String value3) {
+    public OkHttpUtils(String url, String cookie, String name) {
         this.url = url;
-        this.value1 = value1;
-        this.value2 = value2;
-        this.value3 = value3;
+        this.cookie = cookie;
+        this.name = name;
     }
 
-    public OkHttpUtils(String url, String value1, String value2) {
+    public OkHttpUtils(String url, String cookie) {
         this.url = url;
-        this.value1 = value1;
-        this.value2 = value2;
+        this.cookie = cookie;
     }
 
     public OkHttpUtils(String url){
@@ -108,15 +107,15 @@ public class OkHttpUtils {
          */
         FormEncodingBuilder builder = new FormEncodingBuilder();
         builder.add("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz61IGQDPAm6cyppI+uTzQcI8sEH6Q==")
-                .add("txtUserName", value1)
-                .add("TextBox2", value2)
-                .add("txtSecretCode", value3)
+                .add("txtUserName", number)
+                .add("TextBox2", password)
+                .add("txtSecretCode", checkCode)
                 .add("RadioButtonList1", "学生")
                 .add("Button1", "")
                 .add("lbLanguage", "")
                 .add("hidPdrs", "")
                 .add("hidsc", "");
-        Request request = new Request.Builder().url(url).addHeader("Cookie", value4)
+        Request request = new Request.Builder().url(url).addHeader("Cookie", cookie)
                 .addHeader("Referer", "http://222.24.19.201").post(builder.build()).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
@@ -136,7 +135,7 @@ public class OkHttpUtils {
 //                } else {
 //                    return "can not find cookie!";
 //                }
-                return value4;
+                return cookie;
             } else {
                 return "error";
             }
@@ -150,7 +149,7 @@ public class OkHttpUtils {
         StringBuilder content = new StringBuilder();
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setFollowRedirects(false);
-        Request request = new Request.Builder().url(url).addHeader(value1, value2).build();
+        Request request = new Request.Builder().url(url).addHeader("Cookie", cookie).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
             Log.e("getHome--->", String.valueOf(response.code()));
@@ -177,7 +176,7 @@ public class OkHttpUtils {
         okHttpClient.setFollowRedirects(false);
         okHttpClient.setFollowSslRedirects(false);
         Request request = new Request.Builder().url(url)
-                .addHeader(value1, value2).addHeader("Referer",url).build();
+                .addHeader("Cookie", cookie).addHeader("Referer", url).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
             if(response.code() == 200){
@@ -201,7 +200,34 @@ public class OkHttpUtils {
         }
     }
 
-    public String getScoreByPost(Bundle termBundle, Bundle scoreBundle){
+    public String getTrainPlan(String trainValue, String term){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setFollowRedirects(false);
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        builder.add("__EVENTTARGET", "dpDBGrid:txtPageSize").add("__EVENTARGUMENT", "")
+                .add("__VIEWSTATE", trainValue).add("xq", term).add("kcxz", "%C8%AB%B2%BF")
+                .add("Button1", "%BF%C9%CC%E6%BB%BB%BF%CE%B3%CC")
+                .add("dpDBGrid:txtChoosePage", "1").add("dpDBGrid:txtPageSize", "20");
+        Request request = new Request.Builder().url(url).addHeader("Referer", url)
+                .addHeader("Cookie", cookie).post(builder.build()).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                Log.e("headers--->", response.headers().toString());
+                if(response.header("Content-Length").equals("276")){
+                    return "no evaluate";
+                }
+                return response.body().string();
+            } else {
+                return "error";
+            }
+        } catch (IOException e) {
+            Log.e("get raining plan error", e.toString());
+            return "fail";
+        }
+    }
+
+    public String getScoreByPost(Bundle termBundle, Bundle scoreBundle, String scoreValue){
         int count = 0;
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setFollowRedirects(false);
@@ -219,10 +245,10 @@ public class OkHttpUtils {
                  */
                 FormEncodingBuilder builder = new FormEncodingBuilder();
                 builder.add("__EVENTTARGET", "").add("__EVENTARGUMENT", "")
-                        .add("__VIEWSTATE", value3).add("hidLanguage", "")
+                        .add("__VIEWSTATE", scoreValue).add("hidLanguage", "")
                         .add("ddlXN", year).add("ddlXQ", term).add("ddl_kcxz", "")
                         .add("btn_xq", "%D1%A7%C6%DA%B3%C9%BC%A8");
-                Request request = new Request.Builder().url(url).addHeader(value1, value2)
+                Request request = new Request.Builder().url(url).addHeader("Cookie", cookie)
                         .addHeader("Referer", url).post(builder.build()).build();
                 try {
                     Response response = okHttpClient.newCall(request).execute();
@@ -258,13 +284,13 @@ public class OkHttpUtils {
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setFollowRedirects(false);
         okHttpClient.setFollowSslRedirects(false);
-        Request request = new Request.Builder().url(url).addHeader(value1, value2).addHeader("Referer",url).build();
+        Request request = new Request.Builder().url(url).addHeader("Cookie", cookie).addHeader("Referer",url).build();
         try {
             File file = new File(rootPath + "/Boxin/Images");
             if(!file.exists()){
                 file.mkdirs();
             }
-            File file1 = new File(file.getPath() + '/' + value3 + ".png");
+            File file1 = new File(file.getPath() + '/' + name + ".png");
             if(!file1.exists()){
                 Response response = okHttpClient.newCall(request).execute();
                 Log.e("responseCode--->", String.valueOf(response.code()));

@@ -232,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/ticket"
+                android:id="@+id/training_plan"
                 android:background="@color/color_fafafa">
 
                 <RelativeLayout
@@ -257,7 +257,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="70dp"
-                        android:text="准考证"
+                        android:text="培养计划"
                         android:textSize="18sp"
                         android:textColor="@color/color_000000"/>
 

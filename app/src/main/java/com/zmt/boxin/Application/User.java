@@ -1,5 +1,7 @@
 package com.zmt.boxin.Application;
 
+import com.zmt.boxin.Module.TrainCourses;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,32 +22,46 @@ public class User implements Serializable {
     private String imageUrl;
     private String Cookie;
     private String scoreValue;
+    private String trainValue;
+
+    public String getTrainValue() {
+        return trainValue;
+    }
+
+    public void setTrainValue(String trainValue) {
+        this.trainValue = trainValue;
+    }
 
     public void setScoreValue(String scoreValue) {
         this.scoreValue = scoreValue;
     }
 
     public String getScoreValue() {
-
         return scoreValue;
     }
 
     private List<String> termList = new ArrayList<>();
 
-    private List< Map<String, String> > failedPass = new ArrayList<>();
-
-    private List< List<Map<String, String>> > scoreList = new ArrayList<>();
-
     public List<String> getTermList() {
         return termList;
     }
+
+    private List< Map<String, String> > failedPass = new ArrayList<>();
 
     public List<Map<String, String>> getFailedPass() {
         return failedPass;
     }
 
+    private List< List<Map<String, String>> > scoreList = new ArrayList<>();
+
     public List< List<Map<String, String>> > getScoreList() {
         return scoreList;
+    }
+
+    private List<TrainCourses> trainCoursesList = new ArrayList<>();
+
+    public List<TrainCourses> getTrainCoursesList() {
+        return trainCoursesList;
     }
 
     public String getCookie() {

@@ -16,9 +16,6 @@ public class App extends Application {
     public void onCreate(){
         super.onCreate();
         AutoLayoutConifg.getInstance().useDeviceSize();
-        ImageLoaderConfiguration configuration = ImageLoaderConfiguration
-                .createDefault(getApplicationContext());
-        ImageLoader.getInstance().init(configuration);
     }
 
     public User getUser(){

@@ -28,7 +28,7 @@ public class HomeThread implements Runnable{
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url, "Cookie", app.getUser().getCookie());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         Log.e("url--->", url);
         Log.e("Cookie--->", app.getUser().getCookie());
         String result = okHttpUtils.getHomeByGet();

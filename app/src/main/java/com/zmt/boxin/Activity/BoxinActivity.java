@@ -19,7 +19,7 @@ import butterknife.OnClick;
 
 public class BoxinActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolBar) Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.title) TextView title;
     @BindView(R.id.choose) Button chooseJob;
     private int pos = 0;

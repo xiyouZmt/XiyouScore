@@ -23,8 +23,7 @@ public class SaveImage implements Runnable{
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(app.getUser().getImageUrl(),
-                "Cookie", app.getUser().getCookie(), app.getUser().getName());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(app.getUser().getImageUrl(), app.getUser().getCookie(), app.getUser().getName());
         String result = okHttpUtils.saveImage();
         Message msg = new Message();
         switch (result){

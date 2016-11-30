@@ -31,7 +31,7 @@ public class PersonalMessage implements Runnable{
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url, "Cookie", app.getUser().getCookie());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         String result = okHttpUtils.getMessageByGet();
         Message msg = new Message();
         switch (result){

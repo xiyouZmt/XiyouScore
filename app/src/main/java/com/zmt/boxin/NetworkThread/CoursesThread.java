@@ -23,7 +23,7 @@ public class CoursesThread implements Runnable{
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url, "Cookie", app.getUser().getCookie());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         String content = okHttpUtils.getMessageByGet();
         switch (content){
             case "error" :

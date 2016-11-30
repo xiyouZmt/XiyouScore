@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zmt.boxin" >
+    package="com.zmt.boxin">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,8 +12,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".Activity.LoginActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,35 +23,19 @@
 
         <meta-data
             android:name="design_width"
-            android:value="768" >
-        </meta-data>
+            android:value="768"></meta-data>
         <meta-data
             android:name="design_height"
-            android:value="1280" >
-        </meta-data>
+            android:value="1280"></meta-data>
+        <activity android:name=".Activity.MainActivity"/>
+        <activity android:name=".Activity.MessageActivity"/>
+        <activity android:name=".Activity.ScoreActivity"/>
+        <activity android:name=".Activity.SettingActivity"/>
+        <activity android:name=".Activity.SuggestActivity" />
+        <activity android:name=".Activity.BoxinActivity"/>
 
-        <activity
-            android:name=".Activity.StartActivity"
-            android:label="Start" >
-        </activity>
-        <activity android:name=".Activity.MainActivity" >
-        </activity>
-        <activity android:name=".Activity.MessageActivity" >
-        </activity>
-        <activity android:name=".Activity.ScoreActivity" >
-        </activity>
-        <activity android:name=".Activity.SettingActivity" >
-        </activity>
-        <activity
-            android:name=".Activity.SuggestActivity"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity android:name=".Activity.BoxinActivity" >
-        </activity>
-        <activity
-            android:name=".Activity.WebView"
-            android:label="@string/title_activity_web_view" >
-        </activity>
+        <activity android:name=".Activity.WebView" />
+        <activity android:name=".Activity.TrainPlan"/>
     </application>
 
 </manifest>

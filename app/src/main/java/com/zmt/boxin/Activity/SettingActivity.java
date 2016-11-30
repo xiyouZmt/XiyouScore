@@ -19,7 +19,7 @@ import butterknife.OnClick;
 
 public class SettingActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolBar) Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.title) TextView title;
     @BindView(R.id.clean) RelativeLayout clean;
     @BindView(R.id.update) RelativeLayout update;

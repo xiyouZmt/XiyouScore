@@ -7,11 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zmt.boxin.Activity.StartActivity;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.R;
 
@@ -34,7 +32,6 @@ import butterknife.ButterKnife;
  */
 public class Courses extends Fragment {
 
-    @BindView(R.id.button) Button button;
     @BindView(R.id.title) TextView title;
     @BindViews({R.id.Monday_one_two, R.id.Tuesday_one_two, R.id.Wednesday_one_two, R.id.Thursday_one_two, R.id.Friday_one_two})
     TextView [] textViews1;
@@ -120,7 +117,7 @@ public class Courses extends Fragment {
         Element element = document.getElementById("Table1");
         Elements elements = element.getElementsByTag("tr");
         /**
-         * 从下标为2的节点开始， 每两个节点获取一次课表
+         * 从下标为2的节点开始， 每41两个节点获取一次课表
          */
         for (int i = 2; i < elements.size(); i += 2) {
             /**
@@ -171,15 +168,7 @@ public class Courses extends Fragment {
 
     public void initViews() {
         ButterKnife.bind(this, view);
-        app = (App)getActivity().getApplication();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StartActivity.class);
-                startActivity(intent);
-            }
-        });
-        Intent intent;
+        app = (App)getActivity().getApplication();Intent intent;
         if ((intent = getActivity().getIntent()) != null) {
             course = intent.getStringExtra("content");
         }

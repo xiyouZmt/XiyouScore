@@ -19,7 +19,7 @@ import butterknife.OnClick;
 
 public class SuggestActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolBar) Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.title) TextView title;
     @BindView(R.id.suggest_content) EditText suggest_content;
     @BindView(R.id.suggest_number) ClearEditText suggest_number;

@@ -10,4 +10,15 @@
         <item>客户端开发</item>
     </string-array>
 
+    <string-array name="terms">
+        <item>大一第一学期</item>
+        <item>大一第二学期</item>
+        <item>大二第一学期</item>
+        <item>大二第二学期</item>
+        <item>大三第一学期</item>
+        <item>大三第二学期</item>
+        <item>大四第一学期</item>
+        <item>大四第二学期</item>
+    </string-array>
+
 </resources>

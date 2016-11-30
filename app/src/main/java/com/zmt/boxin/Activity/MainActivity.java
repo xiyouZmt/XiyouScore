@@ -35,7 +35,7 @@ import butterknife.OnClick;
 public class MainActivity extends AutoLayoutActivity {
 
     @BindView(R.id.title) TextView title;
-    @BindView(R.id.toolBar) Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.courses) LinearLayout linear_courses;
     @BindView(R.id.run) LinearLayout linear_run;
     @BindView(R.id.choose) LinearLayout linear_choose;

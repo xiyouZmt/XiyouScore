@@ -52,9 +52,9 @@ public class RequestUrl {
     public String scoreUrl = IP + "xscjcx.aspx?xh=";
 
     /**
-     * 图片
+     * 培养计划
      */
-    public String imageUrl;
+    public String trainPlanUrl = IP + "pyjh.aspx?xh=";
 
     public String getName() {
         return name;
@@ -82,6 +82,10 @@ public class RequestUrl {
 
     public String getScoreUrl() {
         return scoreUrl + number + "&xm=" + name + "&gnmkdm=N121605";
+    }
+
+    public String getTrainPlan(){
+        return trainPlanUrl + number + "&xm=" + name + "&gnmkdm=N121607";
     }
 
 }

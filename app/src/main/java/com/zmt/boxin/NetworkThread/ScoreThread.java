@@ -36,10 +36,9 @@ public class ScoreThread implements Runnable{
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url,
-                "Cookie", app.getUser().getCookie(), app.getUser().getScoreValue());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         Bundle scoreBundle = new Bundle();
-        String content = okHttpUtils.getScoreByPost(termBundle, scoreBundle);
+        String content = okHttpUtils.getScoreByPost(termBundle, scoreBundle, app.getUser().getScoreValue());
         Message msg = new Message();
         switch (content){
             case "error" :
@@ -88,14 +87,15 @@ public class ScoreThread implements Runnable{
                     Element element = document.getElementById("Datagrid1");
                     Elements elements = element.getElementsByTag("tr");
                     for (int k = 1; k < elements.size(); k++) {
-                        String year = elements.get(k).getAllElements().get(1).text();               //学年
-                        String term = elements.get(k).getAllElements().get(2).text();               //学期
-                        String courseName = elements.get(k).getAllElements().get(4).text();               //课程名称
-                        String property = elements.get(k).getAllElements().get(5).text();           //课程性质
-                        String credit = elements.get(k).getAllElements().get(7).text();             //课程学分
-                        String score = elements.get(k).getAllElements().get(9).text();              //课程成绩
-                        String resit = elements.get(k).getAllElements().get(11).text();             //补考成绩
-                        String retake = elements.get(k).getAllElements().get(12).text();            //重修成绩
+                        Elements scoreElements = elements.get(k).getAllElements();
+                        String year = scoreElements.get(1).text();               //学年
+                        String term = scoreElements.get(2).text();               //学期
+                        String courseName = scoreElements.get(4).text();         //课程名称
+                        String property = scoreElements.get(5).text();           //课程性质
+                        String credit = scoreElements.get(7).text();             //课程学分
+                        String score = scoreElements.get(9).text();              //课程成绩
+                        String resit = scoreElements.get(11).text();             //补考成绩
+                        String retake = scoreElements.get(12).text();            //重修成绩
                         Map<String, String> map = new HashMap<>();
                         map.put("year", year);
                         map.put("term", term);

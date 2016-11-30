@@ -28,7 +28,7 @@ public class ScoreActivity extends AppCompatActivity {
     private App app;
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.toolBar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindViews({R.id.dropDownMenu1, R.id.dropDownMenu2, R.id.dropDownMenu3, R.id.dropDownMenu4,
             R.id.dropDownMenu5, R.id.dropDownMenu6, R.id.dropDownMenu7, R.id.dropDownMenu8})

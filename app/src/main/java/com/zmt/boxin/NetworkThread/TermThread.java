@@ -1,6 +1,5 @@
 package com.zmt.boxin.NetworkThread;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,9 +32,9 @@ public class TermThread implements Runnable{
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url, "Cookie", app.getUser().getCookie());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         String content = okHttpUtils.getMessageByGet();
-        Message msg = new Message();
+        Message msg = handler.obtainMessage();
         switch (content){
             case "error" :
             case "fail" :
@@ -48,7 +47,6 @@ public class TermThread implements Runnable{
                 ScoreThread scoreThread = new ScoreThread(app, url, bundle, handler);
                 Thread t = new Thread(scoreThread, "ScoreThread");
                 t.start();
-//                handler.sendMessage(msg);
                 break;
         }
     }
@@ -58,7 +56,7 @@ public class TermThread implements Runnable{
         Bundle bundle = new Bundle();
         Document document = Jsoup.parse(content);
         /**
-         * 获取成绩value
+         * 获取成绩value(_VIEWSTATE)
          */
         Element element = document.getElementById("Form1");
         Elements elements = element.getElementsByAttributeValue("name", "__VIEWSTATE");

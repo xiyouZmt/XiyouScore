@@ -1,5 +1,6 @@
 package com.zmt.boxin.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,12 +18,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zmt.boxin.Application.App;
+import com.zmt.boxin.NetworkThread.DefaultTrain;
+import com.zmt.boxin.NetworkThread.GetTrainPlan;
 import com.zmt.boxin.NetworkThread.SaveImage;
 import com.zmt.boxin.R;
 import com.zmt.boxin.Utils.CircleImageView;
+import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,14 +37,14 @@ public class MessageActivity extends AppCompatActivity {
 
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.toolBar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.QR_code)
     ImageView QR_code;
-    @BindView(R.id.ticket)
-    RelativeLayout ticket;
+    @BindView(R.id.training_plan)
+    RelativeLayout training_plan;
     @BindView(R.id.settings)
     RelativeLayout settings;
     @BindView(R.id.quitlogin)
@@ -56,6 +61,10 @@ public class MessageActivity extends AppCompatActivity {
     TextView colleague;
     @BindView(R.id.school)
     TextView school;
+    private App app;
+    private RequestUrl url;
+    private ProgressDialog progressDialog;
+    private String currentTerm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +74,48 @@ public class MessageActivity extends AppCompatActivity {
         initViews();
     }
 
-    @OnClick({R.id.QR_code, R.id.ticket, R.id.settings, R.id.quitlogin})
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Intent intent = new Intent();
+            String obj = msg.obj.toString();
+            switch (obj){
+                case "fail" :
+                case "error" :
+                    progressDialog.dismiss();
+                    Snackbar.make(coordinatorLayout, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
+                    break;
+                case "no evaluate" :
+                    progressDialog.dismiss();
+                    Toast.makeText(MessageActivity.this, "你还没有对本学期的课程进行评价, 请先评价", Toast.LENGTH_SHORT).show();
+                    intent.setClass(MessageActivity.this, com.zmt.boxin.Activity.WebView.class);
+                    startActivity(intent);
+                    break;
+                case "success" :
+                    progressDialog.dismiss();
+                    intent.setClass(MessageActivity.this, TrainPlan.class);
+                    intent.putExtra("currentTerm", currentTerm);
+                    startActivity(intent);
+                    break;
+                case "null" :
+                    /**
+                     * 无法获取当前学期
+                     */
+                    Snackbar.make(coordinatorLayout, "无法获取当前学期, 请稍候重试", Snackbar.LENGTH_SHORT).show();
+                    break;
+                default :
+                    currentTerm = obj;
+                    GetTrainPlan getTrainPlan = new GetTrainPlan(url.getTrainPlan(),
+                            app.getUser().getTrainValue(), obj, handler, app);
+                    getTrainPlan.start();
+                    break;
+            }
+        }
+    };
+
+    @OnClick({R.id.QR_code, R.id.training_plan, R.id.settings, R.id.quitlogin})
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.QR_code:
                 /**
@@ -74,14 +123,18 @@ public class MessageActivity extends AppCompatActivity {
                  */
                 break;
             case R.id.settings:
-                Intent intent = new Intent();
                 intent.setClass(this, SettingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.ticket:
-                /**
-                 * dialog
-                 */
+            case R.id.training_plan:
+                if(app.getUser().getTrainCoursesList().size() == 0){
+                    progressDialog.show();
+                    DefaultTrain defaultTrain = new DefaultTrain(url.getTrainPlan(), handler, app);
+                    defaultTrain.start();
+                } else {
+                    intent.setClass(MessageActivity.this, TrainPlan.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.quitlogin:
 
@@ -90,7 +143,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void initViews() {
-        App app = (App) getApplication();
+        app = (App) getApplication();
         ButterKnife.bind(this);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -108,6 +161,10 @@ public class MessageActivity extends AppCompatActivity {
                 myImage.setImageBitmap(bitmap);
             }
         }
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("正在加载...");
+        progressDialog.setCancelable(false);
+        url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
     }
 
     @Override

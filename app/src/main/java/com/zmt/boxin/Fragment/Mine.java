@@ -123,8 +123,8 @@ public class Mine extends android.support.v4.app.Fragment {
                         app.getUser().getScoreList().size() == 0) {
                     progressDialog.show();
                     RequestUrl url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
-                    TermThread scoreThread = new TermThread(url.getScoreUrl(), handler, app);
-                    Thread t = new Thread(scoreThread, "scoreThread");
+                    TermThread termThread = new TermThread(url.getScoreUrl(), handler, app);
+                    Thread t = new Thread(termThread, "scoreThread");
                     t.start();
                 } else {
                     intent.setClass(getActivity(), ScoreActivity.class);

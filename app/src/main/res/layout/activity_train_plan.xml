@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <com.zmt.boxin.Utils.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_fafafa"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/currentTerm"
+                android:text="大一第一学期培养计划"
+                android:textSize="20sp"
+                android:textColor="@color/color_212121"
+                android:textStyle="bold"/>
+
+            <!--<Button-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:id="@+id/chooseTerm"-->
+                <!--android:background="@drawable/train_plan"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginRight="30dp"-->
+                <!--android:text="选择学期"-->
+                <!--android:textColor="@color/color_fafafa"-->
+                <!--android:textSize="16sp"/>-->
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/currentTerm"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:id="@+id/recyclerView">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </com.zmt.boxin.Utils.MyScrollView>
+
+</LinearLayout>

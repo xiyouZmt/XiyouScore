@@ -56,8 +56,7 @@ xm后加上姓名，并且禁止重定向，同时给请求头加上两对键值
 
 3). ("__VIEWSTATE", "value")
 
-这个键对应的值在成绩首页的HTML页面中
-
+这个value对应的值在成绩首页的HTML页面中, _VIEWSTATE对应的长长的那段
 4). ("hidLanguage", "")
 
 5). ("ddlXN", "学年数")

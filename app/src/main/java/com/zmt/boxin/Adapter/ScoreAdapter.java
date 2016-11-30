@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zmt.boxin.Module.ExamCourse;
 import com.zmt.boxin.R;
 
 import java.util.List;
@@ -22,9 +23,9 @@ import butterknife.ButterKnife;
 public class ScoreAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Map<String, String>> list;
+    private List<ExamCourse> list;
 
-    public ScoreAdapter(Context context, List<Map<String, String>> list) {
+    public ScoreAdapter(Context context, List<ExamCourse> list) {
         this.context = context;
         this.list = list;
     }
@@ -54,40 +55,40 @@ public class ScoreAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.courseName.setText(list.get(position).get("courseName"));
-        viewHolder.property.setText(list.get(position).get("property"));
-        viewHolder.score.setText("正考成绩: " + list.get(position).get("score"));
-        viewHolder.credit.setText("学分: " + list.get(position).get("credit"));
+        viewHolder.courseName.setText(list.get(position).getCourseName());
+        viewHolder.property.setText(list.get(position).getCourseProperty());
+        viewHolder.score.setText("正考成绩: " + list.get(position).getCourseScore());
+        viewHolder.credit.setText("学分: " + list.get(position).getCourseCredit());
         viewHolder.examAgain.setVisibility(View.GONE);
-        if(list.get(position).get("score").equals("不及格")){
+        if(list.get(position).getCourseScore().equals("不及格")){
             viewHolder.result.setText("未通过");
             viewHolder.examAgain.setVisibility(View.VISIBLE);
-            viewHolder.resit.setText(list.get(position).get("retake"));
-            if(list.get(position).get("retake").equals("不及格")){
+            viewHolder.resit.setText(list.get(position).getResitScore());
+            if(list.get(position).getRetakeScore().equals("不及格")){
                 viewHolder.result.setText("重修未通过");
             } else {
                 viewHolder.result.setText("重修通过");
             }
-        } else if(list.get(position).get("score").equals("及格")
-                || list.get(position).get("score").equals("合格")
-                || list.get(position).get("score").equals("中等")
-                || list.get(position).get("score").equals("良好")
-                || list.get(position).get("score").equals("优秀")) {
+        } else if(list.get(position).getCourseScore().equals("及格")
+                || list.get(position).getCourseScore().equals("合格")
+                || list.get(position).getCourseScore().equals("中等")
+                || list.get(position).getCourseScore().equals("良好")
+                || list.get(position).getCourseScore().equals("优秀")) {
             viewHolder.result.setText("正考通过");
-        } else if (Integer.parseInt(list.get(position).get("score")) < 60) {
+        } else if (Integer.parseInt(list.get(position).getCourseScore()) < 60) {
             viewHolder.result.setText("未通过");
             viewHolder.examAgain.setVisibility(View.VISIBLE);
-            if(list.get(position).get("resit").length() != 1){
-                viewHolder.resit.setText("补考成绩: " + list.get(position).get("resit"));
-                if(Integer.parseInt(list.get(position).get("resit")) < 60){
+            if(list.get(position).getResitScore().length() != 1){
+                viewHolder.resit.setText("补考成绩: " + list.get(position).getResitScore());
+                if(Integer.parseInt(list.get(position).getResitScore()) < 60){
                     viewHolder.state.setText("补考未通过");
                 } else {
                     viewHolder.state.setText("补考通过");
                 }
             }
-            if(list.get(position).get("retake").length() != 1){
-                viewHolder.resit.setText("重修成绩: " + list.get(position).get("retake"));
-                if(Integer.parseInt(list.get(position).get("retake")) < 60){
+            if(list.get(position).getRetakeScore().length() != 1){
+                viewHolder.resit.setText("重修成绩: " + list.get(position).getRetakeScore());
+                if(Integer.parseInt(list.get(position).getRetakeScore()) < 60){
                     viewHolder.state.setText("重修未通过");
                 } else {
                     viewHolder.state.setText("重修通过");
@@ -120,5 +121,4 @@ public class ScoreAdapter extends BaseAdapter {
             ButterKnife.bind(this, itemView);
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package com.zmt.boxin.Application;
 
+import com.zmt.boxin.Module.ExamCourse;
 import com.zmt.boxin.Module.TrainCourses;
 
 import java.io.Serializable;
@@ -13,16 +14,25 @@ import java.util.Map;
  */
 public class User implements Serializable {
 
-    private String name;
-    private String number;
-    private String sex;
-    private String colleague;
-    private String major;
-    private String classes;
-    private String imageUrl;
-    private String Cookie;
-    private String scoreValue;
-    private String trainValue;
+    private String name = "";
+    private String number = "";
+    private String sex = "";
+    private String colleague = "";
+    private String major = "";
+    private String classes = "";
+    private String imageUrl = "";
+    private String Cookie = "";
+    private String scoreValue = "";
+    private String trainValue = "";
+    private String currentTerm = "";
+
+    public String getCurrentTerm() {
+        return currentTerm;
+    }
+
+    public void setCurrentTerm(String currentTerm) {
+        this.currentTerm = currentTerm;
+    }
 
     public String getTrainValue() {
         return trainValue;
@@ -52,9 +62,9 @@ public class User implements Serializable {
         return failedPass;
     }
 
-    private List< List<Map<String, String>> > scoreList = new ArrayList<>();
+    private List< List<ExamCourse> > scoreList = new ArrayList<>();
 
-    public List< List<Map<String, String>> > getScoreList() {
+    public List< List<ExamCourse> > getScoreList() {
         return scoreList;
     }
 

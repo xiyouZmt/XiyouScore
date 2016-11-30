@@ -10,7 +10,6 @@ public class TrainCourses {
     private String weekHours;
     private String examMethod;
     private String courseProperty;
-    private String ntroduceUrl;
     private String courseTime;
 
     public String getCourseName() {

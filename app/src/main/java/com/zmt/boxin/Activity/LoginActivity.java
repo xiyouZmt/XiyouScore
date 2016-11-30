@@ -112,36 +112,49 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-    @OnClick(R.id.login)
+    @OnClick({R.id.login, R.id.checkCode})
     public void onClick(View v){
-        IsConnected connected = new IsConnected();
-        if(username.getText().toString().equals("")){
-            Snackbar.make(coordinatorLayout, "用户名不能为空!", Snackbar.LENGTH_SHORT).show();
-        } else if(password.getText().toString().equals("")){
-            Snackbar.make(coordinatorLayout, "密码不能为空!", Snackbar.LENGTH_SHORT).show();
-        } else {
-            number = username.getText().toString();
-            pwd = password.getText().toString();
-            checkCodeText = editText.getText().toString();
-            if(checkbox.isChecked()){
+        switch (v.getId()){
+            case R.id.login :
+                IsConnected connected = new IsConnected();
+                if(username.getText().toString().equals("")){
+                    Snackbar.make(coordinatorLayout, "用户名不能为空!", Snackbar.LENGTH_SHORT).show();
+                } else if(password.getText().toString().equals("")){
+                    Snackbar.make(coordinatorLayout, "密码不能为空!", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    number = username.getText().toString();
+                    pwd = password.getText().toString();
+                    checkCodeText = editText.getText().toString();
+                    if(checkbox.isChecked()){
+                        /**
+                         * 记住密码
+                         */
+                        SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", number);
+                        editor.putString("password", pwd);
+                        editor.apply();
+                    }
+                    if(!connected.checkNetwork(this)){
+                        Snackbar.make(coordinatorLayout, " 网络未连接，请先连接网络!", Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        progressdialog.show();
+                        RequestUrl url = new RequestUrl();
+                        GetSession thread = new GetSession(url.cookieUrl, number, pwd, checkCodeText, handler, app);
+                        Thread t = new Thread(thread, "NetWorkThread");
+                        t.start();
+                    }
+                }
+                break;
+            case R.id.checkCode :
                 /**
-                 * 记住密码
+                 * 重新获取验证码
                  */
-                SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", number);
-                editor.putString("password", pwd);
-                editor.apply();
-            }
-            if(!connected.checkNetwork(this)){
-                Snackbar.make(coordinatorLayout, " 网络未连接，请先连接网络!", Snackbar.LENGTH_SHORT).show();
-            } else {
-                progressdialog.show();
                 RequestUrl url = new RequestUrl();
-                GetSession thread = new GetSession(url.cookieUrl, number, pwd, checkCodeText, handler, app);
-                Thread t = new Thread(thread, "NetWorkThread");
+                IdentifyThread thread = new IdentifyThread(url.getIdentifyCode(), handler, app);
+                Thread t = new Thread(thread, "IdentifyThread");
                 t.start();
-            }
+                break;
         }
     }
 

@@ -64,7 +64,6 @@ public class MessageActivity extends AppCompatActivity {
     private App app;
     private RequestUrl url;
     private ProgressDialog progressDialog;
-    private String currentTerm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class MessageActivity extends AppCompatActivity {
                 case "success" :
                     progressDialog.dismiss();
                     intent.setClass(MessageActivity.this, TrainPlan.class);
-                    intent.putExtra("currentTerm", currentTerm);
+                    intent.putExtra("currentTerm", app.getUser().getCurrentTerm());
                     startActivity(intent);
                     break;
                 case "null" :
@@ -104,7 +103,7 @@ public class MessageActivity extends AppCompatActivity {
                     Snackbar.make(coordinatorLayout, "无法获取当前学期, 请稍候重试", Snackbar.LENGTH_SHORT).show();
                     break;
                 default :
-                    currentTerm = obj;
+                    app.getUser().setCurrentTerm(obj);
                     GetTrainPlan getTrainPlan = new GetTrainPlan(url.getTrainPlan(),
                             app.getUser().getTrainValue(), obj, handler, app);
                     getTrainPlan.start();
@@ -133,6 +132,7 @@ public class MessageActivity extends AppCompatActivity {
                     defaultTrain.start();
                 } else {
                     intent.setClass(MessageActivity.this, TrainPlan.class);
+                    intent.putExtra("currentTerm", app.getUser().getCurrentTerm());
                     startActivity(intent);
                 }
                 break;

@@ -10,8 +10,7 @@
     <com.zmt.boxin.Utils.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_fafafa"
-        android:fillViewport="true">
+        android:background="@color/color_fafafa">
 
         <RelativeLayout
             android:layout_width="match_parent"

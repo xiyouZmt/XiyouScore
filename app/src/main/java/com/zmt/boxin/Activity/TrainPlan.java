@@ -78,38 +78,6 @@ public class TrainPlan extends AppCompatActivity {
         }
     };
 
-//    @OnClick(R.id.chooseTerm)
-//    public void onClick(View v){
-//        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//        dialog.setTitle("选择学期").setSingleChoiceItems(R.array.terms, position - 1, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                if(which + 1 != position){
-//                    tempPos = which + 1;
-//                    update = true;
-//                } else {
-//                    update = false;
-//                }
-//            }
-//        }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                if(update && tempPos != position){
-//                    position = tempPos;
-//                    progressDialog = new ProgressDialog(TrainPlan.this);
-//                    progressDialog.setMessage("正在加载...");
-//                    progressDialog.setCancelable(false);
-//                    progressDialog.show();
-//                    url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
-//                    GetTrainPlan getTrainPlan = new GetTrainPlan(url.getTrainPlan(),
-//                            app.getUser().getTrainValue(), position + "", handler, app);
-//                    getTrainPlan.start();
-//                    update = false;
-//                }
-//            }
-//        }).create().show();
-//    }
-
     public void initViews() {
         ButterKnife.bind(this);
         app = (App) getApplication();

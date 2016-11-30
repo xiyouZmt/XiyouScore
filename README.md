@@ -4,11 +4,11 @@
 
 终于把教务系统搞定了，课表，个人信息，成绩，都可以拿到了
 
-###1.先请求验证码url http://222.24.19.201/CheckCode.aspx 拿到验证码图片和一个sessionID
+###1.GET请求验证码url http://222.24.19.201/CheckCode.aspx 拿到验证码图片和一个sessionID
 
 ###2.POST请求 http://222.24.19.201/default2.aspx 请求体加上9对键值对
 
-1) ("__VIEWSTATE", "dDwyODE2NTM0OTg7Oz4EPWKUJ7QVy9jt5geaO9kcCdS0zQ==")
+1) ("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz61IGQDPAm6cyppI+uTzQcI8sEH6Q==")
 
 2) ("txtUserName", value1)， value1为学号
 

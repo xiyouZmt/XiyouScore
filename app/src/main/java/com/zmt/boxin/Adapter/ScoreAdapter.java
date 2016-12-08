@@ -1,10 +1,9 @@
 package com.zmt.boxin.Adapter;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,7 +11,6 @@ import com.zmt.boxin.Module.ExamCourse;
 import com.zmt.boxin.R;
 
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,24 +18,24 @@ import butterknife.ButterKnife;
 /**
  * Created by Dangelo on 2016/7/31.
  */
-public class ScoreAdapter extends BaseAdapter {
+public class ScoreAdapter extends RecyclerView.Adapter {
 
-    private Context context;
     private List<ExamCourse> list;
 
-    public ScoreAdapter(Context context, List<ExamCourse> list) {
-        this.context = context;
+    public ScoreAdapter(List<ExamCourse> list) {
         this.list = list;
     }
 
     @Override
-    public int getCount() {
-        return list.size();
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.score_item, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return list.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+        setScore(viewHolder, position);
     }
 
     @Override
@@ -46,15 +44,11 @@ public class ScoreAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.score_item, null);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public void setScore(ViewHolder viewHolder, int position){
         viewHolder.courseName.setText(list.get(position).getCourseName());
         viewHolder.property.setText(list.get(position).getCourseProperty());
         viewHolder.score.setText("正考成绩: " + list.get(position).getCourseScore());
@@ -97,10 +91,9 @@ public class ScoreAdapter extends BaseAdapter {
         } else {
             viewHolder.result.setText("正考通过");
         }
-        return convertView;
     }
 
-    class ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.courseName)
         TextView courseName;
         @BindView(R.id.property)
@@ -118,6 +111,7 @@ public class ScoreAdapter extends BaseAdapter {
         @BindView(R.id.examAgain)
         RelativeLayout examAgain;
         public ViewHolder(View itemView){
+            super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }

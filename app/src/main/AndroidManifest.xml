@@ -36,6 +36,9 @@
 
         <activity android:name=".Activity.WebView" />
         <activity android:name=".Activity.TrainPlan"/>
+
+        <activity android:name=".Activity.ScoreActivity"/>
+
     </application>
 
 </manifest>

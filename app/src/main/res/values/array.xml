@@ -21,4 +21,9 @@
         <item>大四第二学期</item>
     </string-array>
 
+    <string-array name="score">
+        <item>学习</item>
+        <item>体测</item>
+    </string-array>
+
 </resources>

@@ -57,7 +57,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:id="@+id/QR_code"
+                    android:id="@+id/QR_Code"
                     android:background="@mipmap/code"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"

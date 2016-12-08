@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:id="@+id/user_image"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:layout_toRightOf="@+id/user_image"
+        android:layout_marginTop="30dp"
+        android:text="欧阳溜溜"
+        android:textSize="20sp"
+        android:textColor="@color/color_000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_grade"
+        android:layout_toRightOf="@+id/user_image"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="10dp"
+        android:text="计科1402"
+        android:textSize="18sp"
+        android:textColor="@color/color_757575"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/username"
+        android:layout_toRightOf="@+id/username"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/user_sex"
+        android:background="@mipmap/male"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/qr_code"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/user_image"
+        android:layout_marginBottom="20dp" />
+
+</RelativeLayout>

@@ -1,6 +1,5 @@
 package com.zmt.boxin.NetworkThread;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
@@ -43,17 +42,16 @@ public class TermThread implements Runnable{
                 handler.sendMessage(msg);
                 break;
             default :
-                Bundle bundle = getTerm(content);
-                ScoreThread scoreThread = new ScoreThread(app, url, bundle, handler);
-                Thread t = new Thread(scoreThread, "ScoreThread");
+                setTerm(content);
+                ScoreThread defaultScore = new ScoreThread(app, url, handler);
+                Thread t = new Thread(defaultScore, "ScoreThread");
                 t.start();
                 break;
         }
     }
 
-    public Bundle getTerm(String content){
+    public void setTerm(String content){
         int i = 0;
-        Bundle bundle = new Bundle();
         Document document = Jsoup.parse(content);
         /**
          * 获取成绩value(_VIEWSTATE)
@@ -69,12 +67,14 @@ public class TermThread implements Runnable{
         /**
          * 获取学期数据
          */
+        app.getUser().getTermList().clear();
         element = document.getElementById("ddlXN");
         if(element != null){
             for (Element element1 : element.getAllElements()) {
                 if(!element1.text().equals("") && element1.tag().toString().equals("option")){
-                    bundle.putString("year" + i, element1.text());
-                    i++;
+//                    bundle.putString("year" + i, element1.text());
+//                    i++;
+                    app.getUser().getTermList().add(element1.text());
                 }
             }
         }
@@ -95,7 +95,6 @@ public class TermThread implements Runnable{
             map.put("score", score);
             app.getUser().getFailedPass().add(map);
         }
-        return bundle;
     }
 
 }

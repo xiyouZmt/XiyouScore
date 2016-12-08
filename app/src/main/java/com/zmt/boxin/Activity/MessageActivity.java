@@ -1,5 +1,6 @@
 package com.zmt.boxin.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.xys.libzxing.zxing.encoding.EncodingUtils;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.DefaultTrain;
 import com.zmt.boxin.NetworkThread.GetTrainPlan;
@@ -41,8 +43,8 @@ public class MessageActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.QR_code)
-    ImageView QR_code;
+    @BindView(R.id.QR_Code)
+    ImageView QR_Code;
     @BindView(R.id.training_plan)
     RelativeLayout training_plan;
     @BindView(R.id.settings)
@@ -64,6 +66,8 @@ public class MessageActivity extends AppCompatActivity {
     private App app;
     private RequestUrl url;
     private ProgressDialog progressDialog;
+    private Bitmap bitmap;
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,14 +116,37 @@ public class MessageActivity extends AppCompatActivity {
         }
     };
 
-    @OnClick({R.id.QR_code, R.id.training_plan, R.id.settings, R.id.quitlogin})
+    @OnClick({R.id.QR_Code, R.id.training_plan, R.id.settings, R.id.quitlogin})
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
-            case R.id.QR_code:
+            case R.id.QR_Code:
                 /**
                  * dialog
                  */
+                View QR_Code_Window = getLayoutInflater().inflate(R.layout.qr_code, null);
+                ImageView user_image = (ImageView) QR_Code_Window.findViewById(R.id.user_image);
+                TextView username = (TextView) QR_Code_Window.findViewById(R.id.username);
+                TextView user_grade = (TextView) QR_Code_Window.findViewById(R.id.user_grade);
+                ImageView user_sex = (ImageView) QR_Code_Window.findViewById(R.id.user_sex);
+                ImageView qr_code = (ImageView) QR_Code_Window.findViewById(R.id.qr_code);
+
+                if(bitmap == null){
+                    bitmap = BitmapFactory.decodeFile(imagePath);
+                }
+                user_image.setImageBitmap(bitmap);
+                username.setText(app.getUser().getName());
+                user_grade.setText(app.getUser().getClasses());
+                if(app.getUser().getSex().equals("男")){
+                    user_sex.setBackgroundResource(R.mipmap.male);
+                } else {
+                    user_sex.setBackgroundResource(R.mipmap.female);
+                }
+                Bitmap qrCodeBitmap = EncodingUtils.createQRCode(app.getUser().getName(), 700, 700, null);
+                qr_code.setImageBitmap(qrCodeBitmap);
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setView(QR_Code_Window).create().show();
                 break;
             case R.id.settings:
                 intent.setClass(this, SettingActivity.class);
@@ -155,9 +182,9 @@ public class MessageActivity extends AppCompatActivity {
         studentClass.setText(app.getUser().getClasses());
         Intent intent;
         if((intent = getIntent()) != null){
-            String imagePath = intent.getStringExtra("imagePath");
+            imagePath = intent.getStringExtra("imagePath");
             if(!imagePath.equals("")){
-                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                bitmap = BitmapFactory.decodeFile(imagePath);
                 myImage.setImageBitmap(bitmap);
             }
         }

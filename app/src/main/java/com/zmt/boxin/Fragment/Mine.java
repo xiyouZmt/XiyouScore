@@ -1,12 +1,12 @@
 package com.zmt.boxin.Fragment;
 
-
+import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,14 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xys.libzxing.zxing.encoding.EncodingUtils;
 import com.zmt.boxin.Activity.MessageActivity;
+import com.zmt.boxin.Activity.ScoreActivity;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.SaveImage;
-import com.zmt.boxin.NetworkThread.TermThread;
 import com.zmt.boxin.R;
-import com.zmt.boxin.Activity.ScoreActivity;
 import com.zmt.boxin.Utils.CircleImageView;
-import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +39,7 @@ public class Mine extends android.support.v4.app.Fragment {
     private App app;
     private View view;
     private String imagePath = "";
+    private Bitmap bitmap;
     private ProgressDialog progressDialog;
     @BindView(R.id.personal) RelativeLayout personal;
     @BindView(R.id.myImage) CircleImageView myImage;
@@ -47,10 +47,11 @@ public class Mine extends android.support.v4.app.Fragment {
     @BindView(R.id.school) TextView school;
     @BindView(R.id.colleague) TextView colleague;
     @BindView(R.id.sex) ImageView sex;
-    @BindView(R.id.QR_code) ImageView QR_code;
+    @BindView(R.id.QR_Code) ImageView QR_code;
     @BindView(R.id.run_note) RelativeLayout run_note;
     @BindView(R.id.score) RelativeLayout score;
-    @BindView(R.id.coordinatorLayout)CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,32 +78,15 @@ public class Mine extends android.support.v4.app.Fragment {
                     Object object;
                     if((object = msg.getData().get("path")) != null){
                         imagePath = object.toString();
-                        Bitmap bitmap = BitmapFactory.decodeFile(object.toString());
+                        bitmap = BitmapFactory.decodeFile(object.toString());
                         myImage.setImageBitmap(bitmap);
                     }
-                    break;
-                case "score is ok" :
-                    Bundle bundle =  msg.getData();
-                    if(bundle != null){
-                        for (int i = 0; i < bundle.size(); i++) {
-                            Object term;
-                            if((term = bundle.get("year" + i)) != null){
-                                String term2 = term + "学年第2学期学习成绩";
-                                String term1 = term + "学年第1学期学习成绩";
-                                app.getUser().getTermList().add(term2);
-                                app.getUser().getTermList().add(term1);
-                            }
-                        }
-                    }
-                    intent.setClass(getActivity(), ScoreActivity.class);
-                    startActivity(intent);
-                    progressDialog.dismiss();
                     break;
             }
         }
     };
 
-    @OnClick({R.id.personal, R.id.QR_code, R.id.run_note, R.id.score})
+    @OnClick({R.id.personal, R.id.QR_Code, R.id.run_note, R.id.score})
     public void onClick(View v){
         Intent intent = new Intent();
         switch (v.getId()){
@@ -111,25 +95,53 @@ public class Mine extends android.support.v4.app.Fragment {
                 intent.putExtra("imagePath", imagePath);
                 startActivity(intent);
                 break;
-            case R.id.QR_code :
+            case R.id.QR_Code :
                 /**
                  * dialog
                  */
+                View QR_Code_Window = getActivity().getLayoutInflater().inflate(R.layout.qr_code, null);
+                ImageView user_image = (ImageView) QR_Code_Window.findViewById(R.id.user_image);
+                TextView username = (TextView) QR_Code_Window.findViewById(R.id.username);
+                TextView user_grade = (TextView) QR_Code_Window.findViewById(R.id.user_grade);
+                ImageView user_sex = (ImageView) QR_Code_Window.findViewById(R.id.user_sex);
+                ImageView qr_code = (ImageView) QR_Code_Window.findViewById(R.id.qr_code);
+
+                if(bitmap == null){
+                    bitmap = BitmapFactory.decodeFile(imagePath);
+                }
+                user_image.setImageBitmap(bitmap);
+                username.setText(app.getUser().getName());
+                user_grade.setText(app.getUser().getClasses());
+                if(app.getUser().getSex().equals("男")){
+                    user_sex.setBackgroundResource(R.mipmap.male);
+                } else {
+                    user_sex.setBackgroundResource(R.mipmap.female);
+                }
+                Bitmap qrCodeBitmap = EncodingUtils.createQRCode(app.getUser().getName(), 700, 700, null);
+                qr_code.setImageBitmap(qrCodeBitmap);
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setView(QR_Code_Window).create().show();
                 break;
             case R.id.run_note :
                 break;
             case R.id.score :
-                if(app.getUser().getTermList().size() == 0 ||
-                        app.getUser().getScoreList().size() == 0) {
-                    progressDialog.show();
-                    RequestUrl url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
-                    TermThread termThread = new TermThread(url.getScoreUrl(), handler, app);
-                    Thread t = new Thread(termThread, "scoreThread");
-                    t.start();
-                } else {
-                    intent.setClass(getActivity(), ScoreActivity.class);
-                    startActivity(intent);
-                }
+//                if(app.getUser().getTermList().size() == 0 ||
+//                        app.getUser().getScoreList().size() == 0) {
+//                    progressDialog.show();
+//                    RequestUrl url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
+//                    TermThread termThread = new TermThread(url.getScoreUrl(), handler, app);
+//                    Thread t = new Thread(termThread, "scoreThread");
+//                    t.start();
+////                    RequestUrl url = new RequestUrl(app.getUser().getNumber());
+////                    PhysicalTest physicalTest = new PhysicalTest(url.getPhysicalTest(), app.getUser().getNumber(), handler);
+////                    physicalTest.start();
+//                } else {
+//                    intent.setClass(getActivity(), ScoreActivity.class);
+//                    startActivity(intent);
+//                }
+                intent.setClass(getActivity(), ScoreActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -7,6 +7,7 @@ import android.util.Log;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.BufferedReader;
@@ -227,56 +228,107 @@ public class OkHttpUtils {
         }
     }
 
-    public String getScoreByPost(Bundle termBundle, Bundle scoreBundle, String scoreValue){
-        int count = 0;
+    public String getScoreByPost(String year, String term, String scoreValue){
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setFollowRedirects(false);
-        for (int i = 0; i < termBundle.size(); i++) {
-            for (int j = 2; j > count; j--) {
-                Object object;
-                String year = "";
-                String term = "";
-                if((object = termBundle.get("year" + i)) != null){
-                    year = object.toString();
-                    term = String.valueOf(j);
+
+
+//        for (int i = 0; i < termBundle.size(); i++) {
+//            for (int j = 2; j > count; j--) {
+//                Object object;
+//                String year = "";
+//                String term = "";
+//                if((object = termBundle.get("year" + i)) != null){
+//                    year = object.toString();
+//                    term = String.valueOf(j);
+//                }
+//                /**
+//                 * 请求体
+//                 */
+//                FormEncodingBuilder builder = new FormEncodingBuilder();
+//                builder.add("__EVENTTARGET", "").add("__EVENTARGUMENT", "")
+//                        .add("__VIEWSTATE", scoreValue).add("hidLanguage", "")
+//                        .add("ddlXN", year).add("ddlXQ", term).add("ddl_kcxz", "")
+//                        .add("btn_xq", "%D1%A7%C6%DA%B3%C9%BC%A8");
+//                Request request = new Request.Builder().url(url).addHeader("Cookie", cookie)
+//                        .addHeader("Referer", url).post(builder.build()).build();
+//                try {
+//                    Response response = okHttpClient.newCall(request).execute();
+//                    if(response.code() == 200){
+////                        Log.e("headers--->", response.headers().toString());
+//                        if(response.header("Content-Length").equals("276")){
+//                            return "no evaluate";
+//                        }
+//                        BufferedReader reader = new BufferedReader(response.body().charStream());
+//                        StringBuilder content = new StringBuilder();
+//                        String line;
+//                        while ((line = reader.readLine()) != null){
+//                            content.append(line);
+//                        }
+//                        reader.close();
+//                        if((object = termBundle.get("year" + i)) != null){
+//                            scoreBundle.putString(object.toString() + " " + j, content.toString());
+//                        }
+//                    } else {
+//                        return "error";
+//                    }
+//                } catch (IOException e) {
+//                    Log.e("getCourses error!--->", e.toString());
+//                    return "fail";
+//                }
+//            }
+//        }
+
+        /**
+         * 请求体
+         */
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        builder.add("__EVENTTARGET", "").add("__EVENTARGUMENT", "")
+                .add("__VIEWSTATE", scoreValue).add("hidLanguage", "")
+                .add("ddlXN", year).add("ddlXQ", term).add("ddl_kcxz", "")
+                .add("btn_xq", "%D1%A7%C6%DA%B3%C9%BC%A8");
+        Request request = new Request.Builder().url(url).addHeader("Cookie", cookie)
+                .addHeader("Referer", url).post(builder.build()).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+//                        Log.e("headers--->", response.headers().toString());
+                if(response.header("Content-Length").equals("276")){
+                    return "no evaluate";
                 }
-                /**
-                 * 请求体
-                 */
-                FormEncodingBuilder builder = new FormEncodingBuilder();
-                builder.add("__EVENTTARGET", "").add("__EVENTARGUMENT", "")
-                        .add("__VIEWSTATE", scoreValue).add("hidLanguage", "")
-                        .add("ddlXN", year).add("ddlXQ", term).add("ddl_kcxz", "")
-                        .add("btn_xq", "%D1%A7%C6%DA%B3%C9%BC%A8");
-                Request request = new Request.Builder().url(url).addHeader("Cookie", cookie)
-                        .addHeader("Referer", url).post(builder.build()).build();
-                try {
-                    Response response = okHttpClient.newCall(request).execute();
-                    if(response.code() == 200){
-                        Log.e("headers--->", response.headers().toString());
-                        if(response.header("Content-Length").equals("276")){
-                            return "no evaluate";
-                        }
-                        BufferedReader reader = new BufferedReader(response.body().charStream());
-                        StringBuilder content = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null){
-                            content.append(line);
-                        }
-                        reader.close();
-                        if((object = termBundle.get("year" + i)) != null){
-                            scoreBundle.putString(object.toString() + " " + j, content.toString());
-                        }
-                    } else {
-                        return "error";
-                    }
-                } catch (IOException e) {
-                    Log.e("getCourses error!--->", e.toString());
-                    return "fail";
+                BufferedReader reader = new BufferedReader(response.body().charStream());
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null){
+                    content.append(line);
                 }
+                reader.close();
+                return content.toString();
+            } else {
+                return "error";
             }
+        } catch (IOException e) {
+            Log.e("getCourses error!--->", e.toString());
+            return "fail";
         }
-        return "score is ok";
+    }
+
+    public String getPhysicalTest(){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        builder.add("stuNum", cookie);
+        Request request = new Request.Builder().url(url).post(builder.build()).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.isSuccessful()){
+                return response.body().string();
+            } else {
+                return "error";
+            }
+        } catch (IOException e) {
+            Log.e("get physicsTest error", e.toString());
+            return "fail";
+        }
     }
 
     public String saveImage(){

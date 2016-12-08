@@ -56,6 +56,8 @@ public class RequestUrl {
      */
     public String trainPlanUrl = IP + "pyjh.aspx?xh=";
 
+    public String physicalTest = "http://yd.boxkj.com/app/measure/getStuTotalScore";
+
     public String getName() {
         return name;
     }
@@ -86,6 +88,10 @@ public class RequestUrl {
 
     public String getTrainPlan(){
         return trainPlanUrl + number + "&xm=" + name + "&gnmkdm=N121607";
+    }
+
+    public String getPhysicalTest(){
+        return physicalTest;
     }
 
 }

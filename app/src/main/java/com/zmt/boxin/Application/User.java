@@ -25,6 +25,24 @@ public class User implements Serializable {
     private String scoreValue = "";
     private String trainValue = "";
     private String currentTerm = "";
+    private String scoreYear = "";
+    private int scoreTerm;
+
+    public String getScoreYear() {
+        return scoreYear;
+    }
+
+    public void setScoreYear(String scoreYear) {
+        this.scoreYear = scoreYear;
+    }
+
+    public int getScoreTerm() {
+        return scoreTerm;
+    }
+
+    public void setScoreTerm(int scoreTerm) {
+        this.scoreTerm = scoreTerm;
+    }
 
     public String getCurrentTerm() {
         return currentTerm;
@@ -62,9 +80,9 @@ public class User implements Serializable {
         return failedPass;
     }
 
-    private List< List<ExamCourse> > scoreList = new ArrayList<>();
+    private List<ExamCourse> scoreList = new ArrayList<>();
 
-    public List< List<ExamCourse> > getScoreList() {
+    public List<ExamCourse> getScoreList() {
         return scoreList;
     }
 

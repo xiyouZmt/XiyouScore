@@ -1,9 +1,11 @@
 package com.zmt.boxin.Activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,12 +45,10 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.remember) CheckBox checkbox;
     @BindView(R.id.username) ClearEditText username;
     @BindView(R.id.password) PasswordEditText password;
-    @BindView(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.checkCodeText) ClearEditText editText;
-    @BindView(R.id.checkCode)ImageView checkCode;
-    private String number;
-    private String pwd;
-    private String checkCodeText;
+    @BindView(R.id.checkCodeText) ClearEditText checkCodeText;
+    @BindView(R.id.checkCode)ImageView checkCodeView;
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout coordinatorLayout;
     private App app;
     private ProgressDialog progressdialog;
     private final String rootPath = Environment.getExternalStorageDirectory() + "/";
@@ -61,17 +63,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initViews();
         SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        String name = sharedPreferences.getString("username", "");
-        String pwd = sharedPreferences.getString("password", "");
-        username.setText(name);
-        password.setText(pwd);
+        if(sharedPreferences != null){
+            String name = sharedPreferences.getString("username", "");
+            String pwd = sharedPreferences.getString("password", "");
+            username.setText(name);
+            password.setText(pwd);
+        }
+
         /**
          * 获取验证码
          */
-        RequestUrl url = new RequestUrl();
-        IdentifyThread thread = new IdentifyThread(url.getIdentifyCode(), handler, app);
-        Thread t = new Thread(thread, "IdentifyThread");
-        t.start();
+        boolean allow = accessPermission();
+        if(allow){
+            RequestUrl url = new RequestUrl();
+            IdentifyThread thread = new IdentifyThread(url.getIdentifyCode(), handler, app);
+            Thread t = new Thread(thread, "IdentifyThread");
+            t.start();
+        }
     }
 
     public final Handler handler = new Handler(){
@@ -88,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 case 0x001 :
                     String checkCodePath = rootPath + "/Boxin/Images/checkCode.png";
                     Bitmap bitmap = BitmapFactory.decodeFile(checkCodePath);
-                    checkCode.setImageBitmap(bitmap);
+                    checkCodeView.setImageBitmap(bitmap);
                     break;
                 case 0x111 :
                     progressdialog.dismiss();
@@ -121,10 +129,12 @@ public class LoginActivity extends AppCompatActivity {
                     Snackbar.make(coordinatorLayout, "用户名不能为空!", Snackbar.LENGTH_SHORT).show();
                 } else if(password.getText().toString().equals("")){
                     Snackbar.make(coordinatorLayout, "密码不能为空!", Snackbar.LENGTH_SHORT).show();
+                } else if(checkCodeText.getText().toString().equals("")){
+                    Snackbar.make(coordinatorLayout, "验证码不能为空!", Snackbar.LENGTH_SHORT).show();
                 } else {
-                    number = username.getText().toString();
-                    pwd = password.getText().toString();
-                    checkCodeText = editText.getText().toString();
+                    String number = username.getText().toString();
+                    String pwd = password.getText().toString();
+                    String checkCode = checkCodeText.getText().toString();
                     if(checkbox.isChecked()){
                         /**
                          * 记住密码
@@ -134,13 +144,20 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("username", number);
                         editor.putString("password", pwd);
                         editor.apply();
+                    } else{
+                        SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                        if(sharedPreferences != null){
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.remove("username");
+                            editor.remove("password");
+                        }
                     }
                     if(!connected.checkNetwork(this)){
                         Snackbar.make(coordinatorLayout, " 网络未连接，请先连接网络!", Snackbar.LENGTH_SHORT).show();
                     } else {
                         progressdialog.show();
                         RequestUrl url = new RequestUrl();
-                        GetSession thread = new GetSession(url.getCookieUrl(), number, pwd, checkCodeText, handler, app);
+                        GetSession thread = new GetSession(url.getCookieUrl(), number, pwd, checkCode, handler, app);
                         Thread t = new Thread(thread, "NetWorkThread");
                         t.start();
                     }
@@ -164,6 +181,39 @@ public class LoginActivity extends AppCompatActivity {
         progressdialog = new ProgressDialog(this);
         progressdialog.setMessage("正在登陆...");
         progressdialog.setCancelable(false);
+    }
+
+    public boolean accessPermission(){
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode){
+            case 1 :
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    /**
+                     * 授予权限，
+                     */
+                    RequestUrl url = new RequestUrl();
+                    IdentifyThread thread = new IdentifyThread(url.getIdentifyCode(), handler, app);
+                    Thread t = new Thread(thread, "IdentifyThread");
+                    t.start();
+                } else {
+                    /**
+                     * 拒绝授予
+                     */
+                    Toast.makeText(LoginActivity.this, "请在系统设置中对本应用开启存储权限!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+        }
     }
 
     @Override

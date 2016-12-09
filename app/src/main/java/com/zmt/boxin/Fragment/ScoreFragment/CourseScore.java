@@ -39,40 +39,32 @@ import butterknife.ButterKnife;
  */
 public class CourseScore extends Fragment {
 
+    public  static final String PHYSICAL_TEST_ITEM_POSITION = "physical test item position";
     private String TAG = "";
-
+    @BindView(R.id.currentTerm)
+    TextView currentTerm;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     private App app;
     private View view;
-    @BindView(R.id.currentTerm) TextView currentTerm;
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
     private ProgressDialog progressDialog;
-    private ScoreAdapter adapter;
-    private PhysicalTestAdapter itemAdapter;
     private RequestUrl url;
     private String [] tabName;
     private String year;
     private int term;
+    public  static int position;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_course_score, container, false);
         initViews();
         if(TAG.equals(tabName[0])){
-            if(app.getUser().getScoreList().size() == 0){
-                progressDialog.show();
-                url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
-                TermThread termThread = new TermThread(url.getScoreUrl(), handler, app);
-                Thread t = new Thread(termThread, "scoreThread");
-                t.start();
-            } else {
-                year = app.getUser().getScoreYear();
-                term  =app.getUser().getScoreTerm();
-                currentTerm.setText(year + "学年第" + term + "学期成绩");
-                adapter = new ScoreAdapter(app.getUser().getScoreList());
-                recyclerView.setAdapter(adapter);
-            }
-        } else {
             progressDialog.show();
+            url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
+            TermThread termThread = new TermThread(url.getScoreUrl(), handler, app);
+            Thread t = new Thread(termThread, "scoreThread");
+            t.start();
+        } else {
             url = new RequestUrl();
             PhysicalTestThread physicalTest = new PhysicalTestThread(app, url.getPhysicalTest(), 123 + "", handler);
             physicalTest.start();
@@ -86,11 +78,9 @@ public class CourseScore extends Fragment {
             switch (msg.obj.toString()){
                 case "fail" :
                 case "error" :
-                    progressDialog.dismiss();
                     Snackbar.make(view, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
                     break;
                 case "no evaluate" :
-                    progressDialog.dismiss();
                     Toast.makeText(getActivity(), "你还没有对本学期的课程进行评价, 请先评价", Toast.LENGTH_SHORT).show();
                     intent.setClass(getActivity(), com.zmt.boxin.Activity.WebView.class);
                     startActivity(intent);
@@ -99,30 +89,35 @@ public class CourseScore extends Fragment {
                      * 暂无成绩(目测大一同学)
                      */
                     Snackbar.make(view, "同学, 你还没有考过试", Snackbar.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                     break;
                 case PhysicalTestThread.PHYSICAL_TEST_NULL :
                     /**
                      * 体测成绩暂无(目测又一大一同学)
                      */
                     Snackbar.make(view, "同学, 你还没有体测过", Snackbar.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                     break;
                 case PhysicalTestItemThread.PHYSICAL_TEST_ITEM_NULL :
                     /**
                      * 单项成绩暂无
                      */
                     Snackbar.make(view, "同学, 单项成绩暂无，请查看其它学期成绩", Snackbar.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
                     break;
                 case PhysicalTestItemThread.PHYSICAL_TEST_ITEM_OK :
-                    itemAdapter = new PhysicalTestAdapter(app.getUser().getPhysicalTestItem());
+                    /**
+                     * 显示体测成绩
+                     */
+                    PhysicalTestAdapter itemAdapter = new PhysicalTestAdapter(app.getUser().getPhysicalTestItem());
                     recyclerView.setAdapter(itemAdapter);
-                    currentTerm.setText(year + "学年第" + term + "学期成绩");
-                    progressDialog.dismiss();
+
+                    year = app.getUser().getPhysicalTest().get(position).getYear();
+                    String totalScore = app.getUser().getPhysicalTest().get(position).getTotalScore();
+                    currentTerm.setText(year + "年体测成绩: " + totalScore);
                     break;
                 default :
-                    adapter = new ScoreAdapter(app.getUser().getScoreList());
+                    /**
+                     * 显示学习成绩
+                     */
+                    ScoreAdapter adapter = new ScoreAdapter(app.getUser().getScoreList());
                     recyclerView.setAdapter(adapter);
                     year = msg.obj.toString();
                     term = msg.what;
@@ -132,9 +127,9 @@ public class CourseScore extends Fragment {
                     app.getUser().setScoreYear(year);
                     app.getUser().setScoreTerm(term);
                     currentTerm.setText(year + "学年第" + term + "学期成绩");
-                    progressDialog.dismiss();
                     break;
             }
+            progressDialog.dismiss();
         }
     };
 
@@ -163,7 +158,13 @@ public class CourseScore extends Fragment {
             Thread t = new Thread(defaultScore, "ScoreThread");
             t.start();
         } else {
-
+            String meaScoreId = bundle.getString("meaScoreId");
+            position = bundle.getInt(PHYSICAL_TEST_ITEM_POSITION);
+            if(meaScoreId != null){
+                url = new RequestUrl();
+                PhysicalTestItemThread physicalTest = new PhysicalTestItemThread(app, url.getPhysicalTestItem(), meaScoreId, handler);
+                physicalTest.start();
+            }
         }
     }
 
@@ -180,5 +181,6 @@ public class CourseScore extends Fragment {
             TAG = bundle.getString(ScoreActivity.SCORE_TYPE);
         }
         tabName = getResources().getStringArray(R.array.score);
+        position = ScoreThread.DEFAULT_YEAR_POSITION * 2 + 2 - ScoreThread.DEFAULT_TERM_POSITION;
     }
 }

@@ -21,12 +21,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xys.libzxing.zxing.encoding.EncodingUtils;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.DefaultTrain;
 import com.zmt.boxin.NetworkThread.GetTrainPlan;
-import com.zmt.boxin.NetworkThread.SaveImage;
 import com.zmt.boxin.R;
 import com.zmt.boxin.Utils.CircleImageView;
 import com.zmt.boxin.Utils.RequestUrl;
@@ -174,7 +172,9 @@ public class MessageActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         title.setText(R.string.message);
         studentName.setText(app.getUser().getName());
         studentNumber.setText("学号: " + app.getUser().getNumber());

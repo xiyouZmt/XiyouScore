@@ -15,13 +15,16 @@ import android.view.MenuItem;
 import com.zmt.boxin.Adapter.TabAdapter;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.Fragment.ScoreFragment.CourseScore;
+import com.zmt.boxin.Module.PhysicalTest;
 import com.zmt.boxin.R;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +39,8 @@ public class ScoreActivity extends AppCompatActivity {
     private int tempPos;
     private String year;
     private int term;
+    private List<String> scoreTermList;
+    private Map<String, String> physicalTestMap;
     private String [] terms;
 
     public static final String TERM = "term";
@@ -59,9 +64,9 @@ public class ScoreActivity extends AppCompatActivity {
         }
         List<Fragment> scoreFragmentList = new ArrayList<>();
         scoreTab.setTabMode(TabLayout.MODE_FIXED);
-        String [] scoreName = getResources().getStringArray(R.array.score);
+        String[] tabName = getResources().getStringArray(R.array.score);
 
-        for (String aScoreName : scoreName) {
+        for (String aScoreName : tabName) {
             CourseScore cultureCourse = new CourseScore();
             scoreTab.addTab(scoreTab.newTab().setText(aScoreName));
             Bundle bundle = new Bundle();
@@ -71,7 +76,7 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager()
-                , Arrays.asList(scoreName), scoreFragmentList);
+                , Arrays.asList(tabName), scoreFragmentList);
         viewPager.setAdapter(tabAdapter);
         scoreTab.setupWithViewPager(viewPager);
     }
@@ -91,15 +96,23 @@ public class ScoreActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.chooseTerm :
-                int n = 0;
-                final List<String> termList = app.getUser().getTermList();
-                terms = new String[termList.size() * 2];
-                for (int i = 0; i < termList.size(); i++) {
-                    for (int j = 2; j > 0; j--) {
-                        terms[n] = termList.get(i) + "学年第" + j + "学期";
-                        n++;
+                if(terms == null || physicalTestMap == null){
+                    int n = 0;
+                    scoreTermList = app.getUser().getTermList();
+                    physicalTestMap = new HashMap<>();
+
+                    List<PhysicalTest> physicalTestList = app.getUser().getPhysicalTest();
+                    terms = new String[scoreTermList.size() * 2];
+                    for (int i = 0; i < scoreTermList.size(); i++) {
+                        for (int j = 2; j > 0; j--) {
+                            terms[n] = scoreTermList.get(i) + "学年第" + j + "学期";
+                            String meaScoreId = physicalTestList.get(n).getMeaScoreId();
+                            physicalTestMap.put(terms[n], meaScoreId);
+                            n++;
+                        }
                     }
                 }
+
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setTitle("选择学期").setSingleChoiceItems(terms, position, new DialogInterface.OnClickListener() {
                     @Override
@@ -111,18 +124,22 @@ public class ScoreActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.e("tempPos", tempPos + "");
                         Log.e("position", position + "");
-                        if(tempPos != position){
+                        if (tempPos != position) {
                             position = tempPos;
                             Bundle bundle = new Bundle();
-                            if(position % 2 == 0){
+
+                            if (position % 2 == 0) {
                                 term = 2;
                             } else {
                                 term = 1;
                             }
-                            bundle.putInt(TERM, term);
                             int yearPos = (position) / 2;
-                            year = termList.get(yearPos);
+                            year = scoreTermList.get(yearPos);
+                            bundle.putInt(TERM, term);
                             bundle.putString(YEAR, year);
+                            bundle.putInt(CourseScore.PHYSICAL_TEST_ITEM_POSITION, position);
+                            bundle.putString("meaScoreId", physicalTestMap.get(terms[position]));
+
                             EventBus.getDefault().post(bundle);
                         }
                     }

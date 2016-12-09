@@ -28,6 +28,7 @@ public class WebView extends AppCompatActivity {
         webView = (android.webkit.WebView) findViewById(R.id.webView);
         RequestUrl url = new RequestUrl(app.getUser().getNumber());
         map.put("Cookie", cookie);
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url.getHomeUrl(), map);
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(android.webkit.WebView webView, String url) {
@@ -35,7 +36,6 @@ public class WebView extends AppCompatActivity {
                 return true;
             }
         });
-        webView.getSettings().setJavaScriptEnabled(true);
     }
 
     @Override

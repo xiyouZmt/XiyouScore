@@ -14,8 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +25,6 @@ import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TrainPlan extends AppCompatActivity {
 
@@ -70,9 +67,9 @@ public class TrainPlan extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case "success" :
-                    progressDialog.dismiss();
                     adapter = new TrainAdapter(app.getUser().getTrainCoursesList());
                     recyclerView.setAdapter(adapter);
+                    progressDialog.dismiss();
                     break;
             }
         }
@@ -84,7 +81,9 @@ public class TrainPlan extends AppCompatActivity {
         toolbar.setTitle("");
         title.setText(R.string.train_plan);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         adapter = new TrainAdapter(app.getUser().getTrainCoursesList());
@@ -126,6 +125,7 @@ public class TrainPlan extends AppCompatActivity {
                         if(update && tempPos != position){
                             position = tempPos;
                             currentTerm.setText(termsArray[position - 1] + getString(R.string.train_plan));
+                            app.getUser().setCurrentTerm(position + "");
                             progressDialog = new ProgressDialog(TrainPlan.this);
                             progressDialog.setMessage("正在加载...");
                             progressDialog.setCancelable(false);

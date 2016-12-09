@@ -22,17 +22,16 @@ public class ScoreThread implements Runnable{
     private String year;
     private String term;
     private Handler handler;
-
-    public static final String YEAR = "year";
-    public static final String TERM = "term";
+    public  static final int DEFAULT_YEAR_POSITION = 0;
+    public  static final int DEFAULT_TERM_POSITION = 2;
 
     public ScoreThread(App app, String url, Handler handler) {
         this.app = app;
         this.url = url;
         this.handler = handler;
-        term = "2";
+        term = DEFAULT_TERM_POSITION + "";
         if(app.getUser().getTermList().size() != 0){
-            year = app.getUser().getTermList().get(0);
+            year = app.getUser().getTermList().get(DEFAULT_YEAR_POSITION);
         }
     }
 
@@ -84,37 +83,6 @@ public class ScoreThread implements Runnable{
     }
 
     public boolean setScore(String scoreContent ,App app){
-//        for (int i = 0; i < termBundle.size(); i++) {
-//            Object object = termBundle.get("year" + i);
-//            for (int j = 2; j > 0; j--){
-//                List<ExamCourse> termScore = new ArrayList<>();
-//                if(object != null){
-//                    /**
-//                     * 每学期成绩数据
-//                     */
-//                    document = Jsoup.parse(scoreBundle.get(object.toString() + " " + j).toString());
-//                    Element element = document.getElementById("Datagrid1");
-//                    Elements elements = element.getElementsByTag("tr");
-//                    for (int k = 1; k < elements.size(); k++) {
-//                        Elements scoreElements = elements.get(k).getAllElements();
-//                        String year = scoreElements.get(1).text();               //学年
-//                        String term = scoreElements.get(2).text();               //学期
-//                        String name = scoreElements.get(4).text();               //课程名称
-//                        String property = scoreElements.get(5).text();           //课程性质
-//                        String credit = scoreElements.get(7).text();             //课程学分
-//                        String score = scoreElements.get(9).text();              //课程成绩
-//                        String resit = scoreElements.get(11).text();             //补考成绩
-//                        String retake = scoreElements.get(12).text();            //重修成绩
-//                        ExamCourse examCourse = new ExamCourse();
-//                        examCourse.setCurrentYear(year).setCurrentTerm(term).setCourseName(name)
-//                                .setCourseProperty(property).setCourseCredit(credit)
-//                                .setCourseScore(score).setResitScore(resit).setRetakeScore(retake);
-//                        termScore.add(examCourse);
-//                    }
-//                }
-//                app.getUser().getScoreList().add(termScore);
-//            }
-//        }
         app.getUser().getScoreList().clear();
         Document document = Jsoup.parse(scoreContent);
         Element element = document.getElementById("Datagrid1");

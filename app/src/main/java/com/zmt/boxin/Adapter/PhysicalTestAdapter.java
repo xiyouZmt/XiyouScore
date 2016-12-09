@@ -4,10 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zmt.boxin.Module.ExamCourse;
 import com.zmt.boxin.Module.PhysicalTestItem;
 import com.zmt.boxin.R;
 
@@ -50,10 +48,11 @@ public class PhysicalTestAdapter extends RecyclerView.Adapter {
     }
 
     public void setScore(ViewHolder viewHolder, int position){
-        viewHolder.examName.setText(list.get(position).getExamName());
-        viewHolder.plusRank.setText(list.get(position).getPlusRank());
+        viewHolder.examName.setText("项目名称: " + list.get(position).getExamName());
+        viewHolder.plusRank.setText("加分: " + list.get(position).getPlusRank());
         viewHolder.score.setText("分数: " + list.get(position).getScore());
-        viewHolder.actualScore.setText("成绩: " + list.get(position).getActualScore() + "(" + list.get(position).getExamUnit() + ")");
+        viewHolder.actualScore.setText("成绩: " + list.get(position).getActualScore()
+                + "(" + list.get(position).getExamUnit() + ")");
         viewHolder.rank.setText("等级: " + list.get(position).getRank());
     }
 

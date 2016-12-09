@@ -5,6 +5,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.zmt.boxin.Application.App;
+import com.zmt.boxin.Fragment.ScoreFragment.CourseScore;
 import com.zmt.boxin.Module.PhysicalTest;
 import com.zmt.boxin.Utils.OkHttpUtils;
 import com.zmt.boxin.Utils.RequestUrl;
@@ -64,11 +65,13 @@ public class PhysicalTestThread extends Thread {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject object = (JSONObject) jsonArray.get(i);
                     PhysicalTest physicalTest = new PhysicalTest();
-                    physicalTest.setMeaScoreId(object.getString("meaScoreId")).setYear(object.getString("year"));
+                    physicalTest.setMeaScoreId(object.getString("meaScoreId"))
+                            .setYear(object.getString("year"))
+                            .setTotalScore(object.getString("totalScore"));
                     app.getUser().getPhysicalTest().add(physicalTest);
                 }
                 RequestUrl url = new RequestUrl();
-                String meaScoreId = app.getUser().getPhysicalTest().get(0).getMeaScoreId();
+                String meaScoreId = app.getUser().getPhysicalTest().get(CourseScore.position).getMeaScoreId();
                 PhysicalTestItemThread itemThread = new PhysicalTestItemThread(
                         app, url.getPhysicalTestItem(), meaScoreId, handler);
                 itemThread.start();

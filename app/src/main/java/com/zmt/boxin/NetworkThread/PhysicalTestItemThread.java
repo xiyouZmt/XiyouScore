@@ -5,7 +5,6 @@ import android.os.Message;
 import android.util.Log;
 
 import com.zmt.boxin.Application.App;
-import com.zmt.boxin.Module.PhysicalTest;
 import com.zmt.boxin.Module.PhysicalTestItem;
 import com.zmt.boxin.Utils.OkHttpUtils;
 

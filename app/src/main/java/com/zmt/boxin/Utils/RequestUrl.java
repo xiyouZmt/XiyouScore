@@ -19,44 +19,52 @@ public class RequestUrl {
         this.number = number;
     }
 
-    public final String IP = "http://222.24.19.201/";
+    private final String IP = "http://222.24.19.201/";
 
     /**
      * 获取验证码
      */
-    public final String identifyCode = IP + "CheckCode.aspx";
+    private final String identifyCode = IP + "CheckCode.aspx";
 
     /**
      * 登陆，获取session
      */
-    public final String cookieUrl = IP + "default2.aspx";
+    private final String cookieUrl = IP + "default2.aspx";
 
     /**
      * 正方首页
      */
-    public String resultUrl = IP + "xs_main.aspx?xh=";
+    private final String resultUrl = IP + "xs_main.aspx?xh=";
 
     /**
      * 课表
      */
-    public String kbUrl = IP + "xskbcx.aspx?xh=";
+    private final String kbUrl = IP + "xskbcx.aspx?xh=";
 
     /**
      * 个人信息
      */
-    public String messageUrl = IP + "xsgrxx.aspx?xh=";
+    private final String messageUrl = IP + "xsgrxx.aspx?xh=";
 
     /**
      * 成绩
      */
-    public String scoreUrl = IP + "xscjcx.aspx?xh=";
+    private final String scoreUrl = IP + "xscjcx.aspx?xh=";
 
     /**
      * 培养计划
      */
-    public String trainPlanUrl = IP + "pyjh.aspx?xh=";
+    private final String trainPlanUrl = IP + "pyjh.aspx?xh=";
 
-    public String physicalTest = "http://yd.boxkj.com/app/measure/getStuTotalScore";
+    /**
+     * 体测成绩
+     */
+    private final String physicalTest = "http://yd.boxkj.com/app/measure/getStuTotalScore";
+
+    /**
+     * 体测单项
+     */
+    private final String physicalTestItem = "http://yd.boxkj.com/app/measure /getStuScoreDetail";
 
     public String getName() {
         return name;
@@ -94,4 +102,11 @@ public class RequestUrl {
         return physicalTest;
     }
 
+    public String getPhysicalTestItem(){
+        return physicalTestItem;
+    }
+
+    public String getCookieUrl() {
+        return cookieUrl;
+    }
 }

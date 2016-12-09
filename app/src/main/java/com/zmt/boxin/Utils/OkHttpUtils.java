@@ -313,10 +313,10 @@ public class OkHttpUtils {
         }
     }
 
-    public String getPhysicalTest(){
+    public String getPhysicalTest(String key, String value){
         OkHttpClient okHttpClient = new OkHttpClient();
         FormEncodingBuilder builder = new FormEncodingBuilder();
-        builder.add("stuNum", cookie);
+        builder.add(key, value);
         Request request = new Request.Builder().url(url).post(builder.build()).build();
         try {
             Response response = okHttpClient.newCall(request).execute();

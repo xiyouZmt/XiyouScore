@@ -36,6 +36,7 @@ public class ScoreActivity extends AppCompatActivity {
     private int tempPos;
     private String year;
     private int term;
+    private String [] terms;
 
     public static final String TERM = "term";
     public static final String YEAR = "year";
@@ -92,7 +93,7 @@ public class ScoreActivity extends AppCompatActivity {
             case R.id.chooseTerm :
                 int n = 0;
                 final List<String> termList = app.getUser().getTermList();
-                final String [] terms = new String[termList.size() * 2];
+                terms = new String[termList.size() * 2];
                 for (int i = 0; i < termList.size(); i++) {
                     for (int j = 2; j > 0; j--) {
                         terms[n] = termList.get(i) + "学年第" + j + "学期";

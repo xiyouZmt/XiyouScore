@@ -207,7 +207,7 @@ public class MainActivity extends AutoLayoutActivity {
                 finish();
                 app.getUser().getTermList().clear();
                 app.getUser().getScoreList().clear();
-                app.getUser().getFailedPass().clear();
+                app.getUser().getTrainCoursesList().clear();
             }
             return true;
         }

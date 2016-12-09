@@ -1,11 +1,12 @@
 package com.zmt.boxin.Application;
 
 import com.zmt.boxin.Module.ExamCourse;
+import com.zmt.boxin.Module.PhysicalTest;
+import com.zmt.boxin.Module.PhysicalTestItem;
 import com.zmt.boxin.Module.TrainCourses;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,6 +85,18 @@ public class User implements Serializable {
 
     public List<ExamCourse> getScoreList() {
         return scoreList;
+    }
+
+    private List<PhysicalTest> physicalTest = new ArrayList<>();
+
+    public List<PhysicalTest> getPhysicalTest(){
+        return physicalTest;
+    }
+
+    private List<PhysicalTestItem> physicalTestItem = new ArrayList<>();
+
+    public List<PhysicalTestItem> getPhysicalTestItem(){
+        return physicalTestItem;
     }
 
     private List<TrainCourses> trainCoursesList = new ArrayList<>();

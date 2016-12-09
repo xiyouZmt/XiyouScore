@@ -96,5 +96,4 @@ public class TermThread implements Runnable{
             app.getUser().getFailedPass().add(map);
         }
     }
-
 }

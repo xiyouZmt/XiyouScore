@@ -134,7 +134,7 @@ public class Mine extends android.support.v4.app.Fragment {
 //                    Thread t = new Thread(termThread, "scoreThread");
 //                    t.start();
 ////                    RequestUrl url = new RequestUrl(app.getUser().getNumber());
-////                    PhysicalTest physicalTest = new PhysicalTest(url.getPhysicalTest(), app.getUser().getNumber(), handler);
+////                    PhysicalTestThread physicalTest = new PhysicalTestThread(url.getPhysicalTest(), app.getUser().getNumber(), handler);
 ////                    physicalTest.start();
 //                } else {
 //                    intent.setClass(getActivity(), ScoreActivity.class);

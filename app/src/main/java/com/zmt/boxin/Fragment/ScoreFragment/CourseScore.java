@@ -17,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zmt.boxin.Activity.ScoreActivity;
+import com.zmt.boxin.Adapter.PhysicalTestAdapter;
 import com.zmt.boxin.Adapter.ScoreAdapter;
 import com.zmt.boxin.Application.App;
+import com.zmt.boxin.NetworkThread.PhysicalTestItemThread;
+import com.zmt.boxin.NetworkThread.PhysicalTestThread;
 import com.zmt.boxin.NetworkThread.ScoreThread;
 import com.zmt.boxin.NetworkThread.TermThread;
 import com.zmt.boxin.R;
@@ -44,6 +47,7 @@ public class CourseScore extends Fragment {
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     private ProgressDialog progressDialog;
     private ScoreAdapter adapter;
+    private PhysicalTestAdapter itemAdapter;
     private RequestUrl url;
     private String [] tabName;
     private String year;
@@ -68,7 +72,10 @@ public class CourseScore extends Fragment {
                 recyclerView.setAdapter(adapter);
             }
         } else {
-
+            progressDialog.show();
+            url = new RequestUrl();
+            PhysicalTestThread physicalTest = new PhysicalTestThread(app, url.getPhysicalTest(), 123 + "", handler);
+            physicalTest.start();
         }
         return view;
     }
@@ -91,7 +98,27 @@ public class CourseScore extends Fragment {
                     /**
                      * 暂无成绩(目测大一同学)
                      */
-                    Toast.makeText(getActivity(), "同学, 你还没有考过试，", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "同学, 你还没有考过试", Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    break;
+                case PhysicalTestThread.PHYSICAL_TEST_NULL :
+                    /**
+                     * 体测成绩暂无(目测又一大一同学)
+                     */
+                    Snackbar.make(view, "同学, 你还没有体测过", Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    break;
+                case PhysicalTestItemThread.PHYSICAL_TEST_ITEM_NULL :
+                    /**
+                     * 单项成绩暂无
+                     */
+                    Snackbar.make(view, "同学, 单项成绩暂无，请查看其它学期成绩", Snackbar.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    break;
+                case PhysicalTestItemThread.PHYSICAL_TEST_ITEM_OK :
+                    itemAdapter = new PhysicalTestAdapter(app.getUser().getPhysicalTestItem());
+                    recyclerView.setAdapter(itemAdapter);
+                    currentTerm.setText(year + "学年第" + term + "学期成绩");
                     progressDialog.dismiss();
                     break;
                 default :

@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         progressdialog.show();
                         RequestUrl url = new RequestUrl();
-                        GetSession thread = new GetSession(url.cookieUrl, number, pwd, checkCodeText, handler, app);
+                        GetSession thread = new GetSession(url.getCookieUrl(), number, pwd, checkCodeText, handler, app);
                         Thread t = new Thread(thread, "NetWorkThread");
                         t.start();
                     }

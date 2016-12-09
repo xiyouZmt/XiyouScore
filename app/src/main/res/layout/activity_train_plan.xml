@@ -10,7 +10,7 @@
     <com.zmt.boxin.Utils.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_fafafa">
+        android:background="@color/color_eeeeee">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/currentTerm"
-                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:scrollbars="vertical"
                 android:id="@+id/recyclerView">
 

@@ -10,7 +10,7 @@
         <item name="windowNoTitle">true</item><!--去掉标题-->
         <!--<item name="android:windowTranslucentStatus">true</item>&lt;!&ndash;使toolBar颜色和状态栏颜色一致&ndash;&gt;-->
         <item name="android:windowAnimationStyle">@style/fade</item>
-        <!--<item name="android:listDivider">@drawable/divide_line</item>-->
+        <item name="android:listDivider">@drawable/divide_line</item>
         <!--<item name="android:actionOverflowButtonStyle">@style/myOverflow</item>     &lt;!&ndash;自定义菜单项&ndash;&gt;-->
     </style>
 

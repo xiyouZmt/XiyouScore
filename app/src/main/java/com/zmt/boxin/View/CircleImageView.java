@@ -1,4 +1,4 @@
-package com.zmt.boxin.Utils;
+package com.zmt.boxin.View;
 
 /**
  * Created by Dangelo on 2016/2/1.

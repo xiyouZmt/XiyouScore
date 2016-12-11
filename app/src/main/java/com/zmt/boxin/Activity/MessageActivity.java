@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,7 +25,6 @@ import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.DefaultTrain;
 import com.zmt.boxin.NetworkThread.GetTrainPlan;
 import com.zmt.boxin.R;
-import com.zmt.boxin.Utils.CircleImageView;
 import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
@@ -35,32 +33,18 @@ import butterknife.OnClick;
 
 public class MessageActivity extends AppCompatActivity {
 
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.title)
-    TextView title;
-    @BindView(R.id.QR_Code)
-    ImageView QR_Code;
-    @BindView(R.id.training_plan)
-    RelativeLayout training_plan;
-    @BindView(R.id.settings)
-    RelativeLayout settings;
-    @BindView(R.id.quitlogin)
-    Button quit_login;
-    @BindView(R.id.myImage)
-    CircleImageView myImage;
-    @BindView(R.id.student_name)
-    TextView studentName;
-    @BindView(R.id.student_number)
-    TextView studentNumber;
-    @BindView(R.id.student_class)
-    TextView studentClass;
-    @BindView(R.id.colleague)
-    TextView colleague;
-    @BindView(R.id.school)
-    TextView school;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.title) TextView title;
+    @BindView(R.id.QR_Code) ImageView QR_Code;
+    @BindView(R.id.training_plan) RelativeLayout training_plan;
+    @BindView(R.id.settings) RelativeLayout settings;
+    @BindView(R.id.quitlogin) Button quit_login;
+    @BindView(R.id.myImage) ImageView myImage;
+    @BindView(R.id.student_name) TextView studentName;
+    @BindView(R.id.student_number) TextView studentNumber;
+    @BindView(R.id.student_class) TextView studentClass;
+    @BindView(R.id.colleague) TextView colleague;
+    @BindView(R.id.school) TextView school;
     private App app;
     private RequestUrl url;
     private ProgressDialog progressDialog;
@@ -84,7 +68,7 @@ public class MessageActivity extends AppCompatActivity {
                 case "fail" :
                 case "error" :
                     progressDialog.dismiss();
-                    Snackbar.make(coordinatorLayout, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(training_plan, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
                     break;
                 case "no evaluate" :
                     progressDialog.dismiss();
@@ -102,7 +86,7 @@ public class MessageActivity extends AppCompatActivity {
                     /**
                      * 无法获取当前学期
                      */
-                    Snackbar.make(coordinatorLayout, "无法获取当前学期, 请稍候重试", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(training_plan, "无法获取当前学期, 请稍候重试", Snackbar.LENGTH_SHORT).show();
                     break;
                 default :
                     app.getUser().setCurrentTerm(obj);

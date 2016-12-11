@@ -53,7 +53,7 @@
         android:textSize="12sp"
         android:textColor="@color/color_000000" />
 
-    <com.zmt.boxin.Utils.ClearEditText
+    <com.zmt.boxin.View.ClearEditText
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_below="@+id/suggestText_b"

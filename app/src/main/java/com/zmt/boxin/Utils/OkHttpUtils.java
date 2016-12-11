@@ -81,7 +81,6 @@ public class OkHttpUtils {
                 /**
                  * 获取cookie
                  */
-                Log.e("headers", response.headers().toString());
                 if(response.header("Set-Cookie") != null){
                     String cookie =  response.header("Set-Cookie");
                     return cookie.substring(0, cookie.indexOf(';'));

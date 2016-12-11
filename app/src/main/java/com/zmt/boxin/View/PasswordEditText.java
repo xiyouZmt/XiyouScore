@@ -1,4 +1,4 @@
-package com.zmt.boxin.Utils;
+package com.zmt.boxin.View;
 
 import android.content.Context;
 import android.graphics.Bitmap;

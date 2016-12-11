@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zmt.boxin.R;
-import com.zmt.boxin.Utils.DropDownMenu;
+import com.zmt.boxin.View.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.List;

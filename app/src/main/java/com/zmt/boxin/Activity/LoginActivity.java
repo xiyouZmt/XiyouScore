@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -30,9 +29,9 @@ import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.GetSession;
 import com.zmt.boxin.NetworkThread.IdentifyThread;
 import com.zmt.boxin.R;
-import com.zmt.boxin.Utils.ClearEditText;
+import com.zmt.boxin.View.ClearEditText;
 import com.zmt.boxin.Utils.IsConnected;
-import com.zmt.boxin.Utils.PasswordEditText;
+import com.zmt.boxin.View.PasswordEditText;
 import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
@@ -47,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password) PasswordEditText password;
     @BindView(R.id.checkCodeText) ClearEditText checkCodeText;
     @BindView(R.id.checkCode)ImageView checkCodeView;
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
     private App app;
     private ProgressDialog progressdialog;
     private final String rootPath = Environment.getExternalStorageDirectory() + "/";
@@ -87,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent();
             switch (msg.what){
                 case 0x000 :
-                    Snackbar.make(coordinatorLayout, "登陆成功!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "登陆成功!", Snackbar.LENGTH_SHORT).show();
                     intent.setClass(LoginActivity.this, MainActivity.class);
                     intent.putExtra("content", msg.obj.toString());
                     startActivity(intent);
@@ -100,15 +97,15 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case 0x111 :
                     progressdialog.dismiss();
-                    Snackbar.make(coordinatorLayout, "用户名或密码错误!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "用户名或密码错误!", Snackbar.LENGTH_SHORT).show();
                     break;
                 case 0x222 :
                     progressdialog.dismiss();
-                    Snackbar.make(coordinatorLayout, "服务端连接失败,请重新登陆!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "服务端连接失败,请重新登陆!", Snackbar.LENGTH_SHORT).show();
                     break;
                 case 0x333 :
                     progressdialog.dismiss();
-                    Snackbar.make(coordinatorLayout, "网络连接错误!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "网络连接错误!", Snackbar.LENGTH_SHORT).show();
                     break;
                 case 0x444 :
                     progressdialog.dismiss();
@@ -126,11 +123,11 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.login :
                 IsConnected connected = new IsConnected();
                 if(username.getText().toString().equals("")){
-                    Snackbar.make(coordinatorLayout, "用户名不能为空!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "用户名不能为空!", Snackbar.LENGTH_SHORT).show();
                 } else if(password.getText().toString().equals("")){
-                    Snackbar.make(coordinatorLayout, "密码不能为空!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "密码不能为空!", Snackbar.LENGTH_SHORT).show();
                 } else if(checkCodeText.getText().toString().equals("")){
-                    Snackbar.make(coordinatorLayout, "验证码不能为空!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(login, "验证码不能为空!", Snackbar.LENGTH_SHORT).show();
                 } else {
                     String number = username.getText().toString();
                     String pwd = password.getText().toString();
@@ -150,10 +147,11 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.remove("username");
                             editor.remove("password");
+                            editor.apply();
                         }
                     }
                     if(!connected.checkNetwork(this)){
-                        Snackbar.make(coordinatorLayout, " 网络未连接，请先连接网络!", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(login, "网络未连接，请先连接网络!", Snackbar.LENGTH_SHORT).show();
                     } else {
                         progressdialog.show();
                         RequestUrl url = new RequestUrl();

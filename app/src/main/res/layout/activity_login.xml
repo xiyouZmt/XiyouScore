@@ -14,7 +14,7 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <com.zmt.boxin.Utils.CircleImageView
+            <com.zmt.boxin.View.CircleImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@mipmap/logo"/>
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.zmt.boxin.Utils.ClearEditText
+                <com.zmt.boxin.View.ClearEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/username"
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.zmt.boxin.Utils.PasswordEditText
+                <com.zmt.boxin.View.PasswordEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/password"
@@ -65,7 +65,7 @@
                     android:layout_marginRight="100dp"
                     android:id="@+id/TextLayout">
 
-                    <com.zmt.boxin.Utils.ClearEditText
+                    <com.zmt.boxin.View.ClearEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/checkCodeText"
@@ -109,12 +109,12 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/coordinatorLayout">
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:id="@+id/coordinatorLayout">-->
 
-    </android.support.design.widget.CoordinatorLayout>
+    <!--</android.support.design.widget.CoordinatorLayout>-->
 
 </RelativeLayout>

@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,6 @@ import com.zmt.boxin.Activity.ScoreActivity;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.SaveImage;
 import com.zmt.boxin.R;
-import com.zmt.boxin.Utils.CircleImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +40,7 @@ public class Mine extends android.support.v4.app.Fragment {
     private Bitmap bitmap;
     private ProgressDialog progressDialog;
     @BindView(R.id.personal) RelativeLayout personal;
-    @BindView(R.id.myImage) CircleImageView myImage;
+    @BindView(R.id.myImage) ImageView myImage;
     @BindView(R.id.student_name) TextView student_name;
     @BindView(R.id.school) TextView school;
     @BindView(R.id.colleague) TextView colleague;
@@ -50,8 +48,6 @@ public class Mine extends android.support.v4.app.Fragment {
     @BindView(R.id.QR_Code) ImageView QR_code;
     @BindView(R.id.run_note) RelativeLayout run_note;
     @BindView(R.id.score) RelativeLayout score;
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +63,7 @@ public class Mine extends android.support.v4.app.Fragment {
                 case "fail" :
                 case "error" :
                     progressDialog.dismiss();
-                    Snackbar.make(coordinatorLayout, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "网络连接错误, 请检查网络连接", Snackbar.LENGTH_SHORT).show();
                     break;
                 case "no evaluate" :
                     progressDialog.dismiss();
@@ -126,20 +122,6 @@ public class Mine extends android.support.v4.app.Fragment {
             case R.id.run_note :
                 break;
             case R.id.score :
-//                if(app.getUser().getTermList().size() == 0 ||
-//                        app.getUser().getScoreList().size() == 0) {
-//                    progressDialog.show();
-//                    RequestUrl url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
-//                    TermThread termThread = new TermThread(url.getScoreUrl(), handler, app);
-//                    Thread t = new Thread(termThread, "scoreThread");
-//                    t.start();
-////                    RequestUrl url = new RequestUrl(app.getUser().getNumber());
-////                    PhysicalTestThread physicalTest = new PhysicalTestThread(url.getPhysicalTest(), app.getUser().getNumber(), handler);
-////                    physicalTest.start();
-//                } else {
-//                    intent.setClass(getActivity(), ScoreActivity.class);
-//                    startActivity(intent);
-//                }
                 intent.setClass(getActivity(), ScoreActivity.class);
                 startActivity(intent);
                 break;
@@ -166,5 +148,4 @@ public class Mine extends android.support.v4.app.Fragment {
         Thread t = new Thread(saveImage, "SaveImage");
         t.start();
     }
-
 }

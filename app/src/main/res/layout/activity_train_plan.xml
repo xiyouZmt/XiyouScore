@@ -7,7 +7,7 @@
 
     <include layout="@layout/toolbar_layout"/>
 
-    <com.zmt.boxin.Utils.MyScrollView
+    <com.zmt.boxin.View.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_eeeeee">
@@ -41,6 +41,6 @@
 
         </RelativeLayout>
 
-    </com.zmt.boxin.Utils.MyScrollView>
+    </com.zmt.boxin.View.MyScrollView>
 
 </LinearLayout>

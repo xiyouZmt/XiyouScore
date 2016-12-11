@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zmt.boxin.R;
-import com.zmt.boxin.Utils.ClearEditText;
+import com.zmt.boxin.View.ClearEditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

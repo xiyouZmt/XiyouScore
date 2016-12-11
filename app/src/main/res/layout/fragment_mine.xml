@@ -1,181 +1,166 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_eeeeee"
-    tools:context="com.zmt.boxin.Fragment.Mine">
+    android:orientation="vertical"
+    android:background="@color/color_eeeeee">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:id="@+id/personal"
+        android:background="@color/color_fafafa">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/personal"
-            android:background="@color/color_fafafa">
+            android:background="?android:attr/selectableItemBackground">
 
-            <RelativeLayout
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/myImage" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/myImage"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/student_name"
+
+                android:textSize="16sp"
+                android:textColor="@color/color_212121"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_toRightOf="@+id/student_name"
+                android:layout_alignBottom="@+id/student_name"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/sex"
+                android:background="@mipmap/male"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/QR_Code"
+                android:background="@mipmap/code"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
-
-                <com.zmt.boxin.Utils.CircleImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/myImage" />
+                android:gravity="center"
+                android:layout_below="@+id/student_name"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/myImage"
-                    android:layout_marginTop="20dp"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/student_name"
-
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:id="@+id/school"
+                    android:text="西安邮电大学"
                     android:textSize="16sp"
-                    android:textColor="@color/color_212121"/>
+                    android:textColor="@color/color_757575"/>
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_toRightOf="@+id/student_name"
-                    android:layout_alignBottom="@+id/student_name"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/sex"
-                    android:background="@mipmap/male"/>
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/QR_Code"
-                    android:background="@mipmap/code"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/student_name"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp">
+                    android:paddingLeft="10dp"
+                    android:id="@+id/colleague"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_757575"/>
 
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:paddingRight="10dp"
-                        android:id="@+id/school"
-                        android:text="西安邮电大学"
-                        android:textSize="16sp"
-                        android:textColor="@color/color_757575"/>
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:id="@+id/colleague"
-                        android:textSize="16sp"
-                        android:textColor="@color/color_757575"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+    </RelativeLayout>
 
-            </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_dddddd"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/color_dddddd"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/color_fafafa">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/run_note"
+            android:background="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="跑步记录"
+                android:textSize="16sp"
+                android:textColor="@color/color_212121"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/run_note"/>
 
         </RelativeLayout>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_dddddd"/>
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_999999"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/color_dddddd"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/score"
+            android:background="?android:attr/selectableItemBackground">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@color/color_fafafa">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/run_note"
-                android:background="?android:attr/selectableItemBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="跑步记录"
-                    android:textSize="16sp"
-                    android:textColor="@color/color_212121"/>
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/run_note"/>
-
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="成绩单"
+                android:textSize="16sp"
+                android:textColor="@color/color_212121"/>
 
             <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/color_999999"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/score"/>
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/score"
-                android:background="?android:attr/selectableItemBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="成绩单"
-                    android:textSize="16sp"
-                    android:textColor="@color/color_212121"/>
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/score"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_dddddd"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
-    <android.support.design.widget.CoordinatorLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/coordinatorLayout"
-        android:layout_alignParentBottom="true">
+        android:layout_height="1dp"
+        android:background="@color/color_dddddd"/>
 
-    </android.support.design.widget.CoordinatorLayout>
-
-</RelativeLayout>
+</LinearLayout>

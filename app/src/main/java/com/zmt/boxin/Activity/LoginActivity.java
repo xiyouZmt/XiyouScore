@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.username) ClearEditText username;
     @BindView(R.id.password) PasswordEditText password;
     @BindView(R.id.checkCodeText) ClearEditText checkCodeText;
-    @BindView(R.id.checkCode)ImageView checkCodeView;
+    @BindView(R.id.checkCode) ImageView checkCodeView;
     private App app;
     private ProgressDialog progressdialog;
     private final String rootPath = Environment.getExternalStorageDirectory() + "/";

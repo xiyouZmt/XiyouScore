@@ -21,9 +21,14 @@ import android.widget.Toast;
 import com.xys.libzxing.zxing.encoding.EncodingUtils;
 import com.zmt.boxin.Activity.MessageActivity;
 import com.zmt.boxin.Activity.ScoreActivity;
+import com.zmt.boxin.Activity.SettingActivity;
+import com.zmt.boxin.Activity.TrainPlan;
 import com.zmt.boxin.Application.App;
+import com.zmt.boxin.NetworkThread.DefaultTrain;
+import com.zmt.boxin.NetworkThread.GetTrainPlan;
 import com.zmt.boxin.NetworkThread.SaveImage;
 import com.zmt.boxin.R;
+import com.zmt.boxin.Utils.RequestUrl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +42,7 @@ public class Mine extends android.support.v4.app.Fragment {
     private App app;
     private View view;
     private String imagePath = "";
+    private RequestUrl url;
     private Bitmap bitmap;
     private ProgressDialog progressDialog;
     @BindView(R.id.personal) RelativeLayout personal;
@@ -48,6 +54,10 @@ public class Mine extends android.support.v4.app.Fragment {
     @BindView(R.id.QR_Code) ImageView QR_code;
     @BindView(R.id.run_note) RelativeLayout run_note;
     @BindView(R.id.score) RelativeLayout score;
+    @BindView(R.id.training_plan) RelativeLayout training_plan;
+    @BindView(R.id.training_plan_test) RelativeLayout training_plan_test;
+    @BindView(R.id.settings) RelativeLayout settings;
+    @BindView(R.id.settings_test) RelativeLayout settings_test;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +69,8 @@ public class Mine extends android.support.v4.app.Fragment {
     public final Handler handler = new Handler(){
         public void handleMessage(Message msg){
             Intent intent = new Intent();
-            switch (msg.obj.toString()){
+            String obj = msg.obj.toString();
+            switch (obj){
                 case "fail" :
                 case "error" :
                     progressDialog.dismiss();
@@ -78,11 +89,29 @@ public class Mine extends android.support.v4.app.Fragment {
                         myImage.setImageBitmap(bitmap);
                     }
                     break;
+                case "success" :
+                    progressDialog.dismiss();
+                    intent.setClass(getActivity(), TrainPlan.class);
+                    intent.putExtra("currentTerm", app.getUser().getCurrentTerm());
+                    startActivity(intent);
+                    break;
+                case "null" :
+                    /**
+                     * 无法获取当前学期
+                     */
+                    Snackbar.make(view, "无法获取当前学期, 请稍候重试", Snackbar.LENGTH_SHORT).show();
+                    break;
+                default :
+                    app.getUser().setCurrentTerm(obj);
+                    GetTrainPlan getTrainPlan = new GetTrainPlan(url.getTrainPlan(),
+                            app.getUser().getTrainValue(), obj, handler, app);
+                    getTrainPlan.start();
+                    break;
             }
         }
     };
 
-    @OnClick({R.id.personal, R.id.QR_Code, R.id.run_note, R.id.score})
+    @OnClick({R.id.personal, R.id.QR_Code, R.id.run_note, R.id.score, R.id.training_plan, R.id.training_plan_test, R.id.settings, R.id.settings_test})
     public void onClick(View v){
         Intent intent = new Intent();
         switch (v.getId()){
@@ -125,6 +154,23 @@ public class Mine extends android.support.v4.app.Fragment {
                 intent.setClass(getActivity(), ScoreActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.training_plan:
+            case R.id.training_plan_test :
+                if(app.getUser().getTrainCoursesList().size() == 0){
+                    progressDialog.show();
+                    DefaultTrain defaultTrain = new DefaultTrain(url.getTrainPlan(), handler, app);
+                    defaultTrain.start();
+                } else {
+                    intent.setClass(getActivity(), TrainPlan.class);
+                    intent.putExtra("currentTerm", app.getUser().getCurrentTerm());
+                    startActivity(intent);
+                }
+                break;
+            case R.id.settings :
+            case R.id.settings_test :
+                intent.setClass(getActivity(), SettingActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -147,5 +193,6 @@ public class Mine extends android.support.v4.app.Fragment {
         SaveImage saveImage = new SaveImage(app, handler);
         Thread t = new Thread(saveImage, "SaveImage");
         t.start();
+        url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
     }
 }

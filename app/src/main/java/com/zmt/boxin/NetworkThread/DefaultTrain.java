@@ -28,8 +28,7 @@ public class DefaultTrain extends Thread {
     @Override
     public void run() {
         OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
-        String content;
-        content = okHttpUtils.getMessageByGet();
+        String content = okHttpUtils.getMessageByGet();
         Message msg = handler.obtainMessage();
         switch (content){
             case "error" :

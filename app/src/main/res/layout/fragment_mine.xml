@@ -89,12 +89,12 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/color_dddddd"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginTop="30dp"
         android:background="@color/color_dddddd"/>
 
@@ -161,12 +161,12 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/color_dddddd"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginTop="20dp"
         android:background="@color/color_dddddd"/>
 
@@ -174,13 +174,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:id="@+id/training_plan"
         android:background="@color/color_fafafa">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/training_plan"
             android:background="?android:attr/selectableItemBackground">
 
             <ImageView
@@ -204,6 +204,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/training_plan_test"
             android:background="?android:attr/selectableItemBackground">
 
             <ImageView
@@ -220,12 +221,12 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/color_dddddd"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginTop="20dp"
         android:background="@color/color_dddddd"/>
 
@@ -233,13 +234,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:id="@+id/settings"
         android:background="@color/color_fafafa">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/settings"
             android:background="?android:attr/selectableItemBackground">
 
             <ImageView
@@ -263,6 +264,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/settings_test"
             android:background="?android:attr/selectableItemBackground">
 
             <ImageView
@@ -279,7 +281,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/color_dddddd"/>
 
 </LinearLayout>

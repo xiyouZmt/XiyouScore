@@ -160,7 +160,7 @@ public class CourseScore extends Fragment {
         } else {
             String meaScoreId = bundle.getString("meaScoreId");
             position = bundle.getInt(PHYSICAL_TEST_ITEM_POSITION);
-            if(meaScoreId != null){
+            if(meaScoreId != null && !meaScoreId.equals("")){
                 url = new RequestUrl();
                 PhysicalTestItemThread physicalTest = new PhysicalTestItemThread(app, url.getPhysicalTestItem(), meaScoreId, handler);
                 physicalTest.start();

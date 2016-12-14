@@ -106,8 +106,13 @@ public class ScoreActivity extends AppCompatActivity {
                     for (int i = 0; i < scoreTermList.size(); i++) {
                         for (int j = 2; j > 0; j--) {
                             terms[n] = scoreTermList.get(i) + "学年第" + j + "学期";
-                            String meaScoreId = physicalTestList.get(n).getMeaScoreId();
-                            physicalTestMap.put(terms[n], meaScoreId);
+                            String meaScoreId = "";
+                            if(physicalTestList.size() != 0){
+                                meaScoreId = physicalTestList.get(n).getMeaScoreId();
+                                physicalTestMap.put(terms[n], meaScoreId);
+                            } else {
+                                physicalTestMap.put(terms[n], meaScoreId);
+                            }
                             n++;
                         }
                     }
@@ -127,7 +132,6 @@ public class ScoreActivity extends AppCompatActivity {
                         if (tempPos != position) {
                             position = tempPos;
                             Bundle bundle = new Bundle();
-
                             if (position % 2 == 0) {
                                 term = 2;
                             } else {

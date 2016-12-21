@@ -2,8 +2,6 @@ package com.zmt.boxin.Application;
 
 import android.app.Application;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
 /**

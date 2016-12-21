@@ -50,4 +50,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/AMap2DMap_2.9.3_AMapLocation_3.2.0_20161205.jar')
+    compile files('libs/AMap_Location_V3.2.0_20161205.jar')
 }

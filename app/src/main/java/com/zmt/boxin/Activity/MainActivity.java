@@ -127,10 +127,13 @@ public class MainActivity extends AutoLayoutActivity {
                 break;
             case 2 :
             case R.id.make_run :
-                title.setText(R.string.make_run);
-                image_make_run.setBackgroundResource(R.mipmap.make_run_pressed);
-                text_make_run.setTextColor(0xff03a9f4);
-                viewPager.setCurrentItem(2);
+//                title.setText(R.string.make_run);
+//                image_make_run.setBackgroundResource(R.mipmap.make_run_pressed);
+//                text_make_run.setTextColor(0xff03a9f4);
+//                viewPager.setCurrentItem(2);
+                Intent intent = new Intent();
+                intent.setClass(this, RunActivity.class);
+                startActivity(intent);
                 break;
             case 3 :
             case R.id.choose :
@@ -194,7 +197,6 @@ public class MainActivity extends AutoLayoutActivity {
             }
         });
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

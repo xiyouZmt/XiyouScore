@@ -1,10 +1,11 @@
 <resources>
 
-    <string name="app_name">Boxin</string>
+    <string name="app_name">校味</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">设置</string>
     <string name="Boxin">博信科技</string>
     <string name="about">关于</string>
+    <string name="home">首页</string>
     <string name="courses">课程</string>
     <string name="run">跑步</string>
     <string name="make_run">约跑</string>

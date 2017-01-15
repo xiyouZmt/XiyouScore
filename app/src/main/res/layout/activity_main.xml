@@ -1,9 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_eeeeee"
-    tools:context=".MainActivity">
+    android:background="@color/color_eeeeee">
 
     <include layout="@layout/toolbar_layout"/>
 
@@ -37,21 +35,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:id="@+id/courses"
+            android:id="@+id/home"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/image_courses"
-                android:background="@mipmap/courses_pressed"/>
+                android:id="@+id/image_home"
+                android:background="@mipmap/home_pressed"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_courses"
-                android:text="@string/courses"
+                android:id="@+id/text_home"
+                android:text="@string/home"
                 android:textSize="12sp"
                 android:textColor="@color/color_03a9f4"/>
 
@@ -62,75 +60,100 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:id="@+id/run"
+            android:id="@+id/courses"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/image_run"
-                android:background="@mipmap/run"/>
+                android:id="@+id/image_courses"
+                android:background="@mipmap/courses"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_run"
-                android:text="@string/run"
+                android:id="@+id/text_courses"
+                android:text="@string/courses"
                 android:textSize="12sp"
                 android:textColor="@color/color_757575"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/make_run"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center">
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:id="@+id/run"-->
+            <!--android:background="?android:attr/selectableItemBackground"-->
+            <!--android:gravity="center">-->
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/image_make_run"
-                android:background="@mipmap/make_run"/>
+            <!--<ImageView-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:id="@+id/image_run"-->
+                <!--android:background="@mipmap/run"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_make_run"
-                android:text="@string/make_run"
-                android:textSize="12sp"
-                android:textColor="@color/color_757575"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/text_run"-->
+                <!--android:text="@string/run"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textColor="@color/color_757575"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/choose"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center">
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:id="@+id/make_run"-->
+            <!--android:background="?android:attr/selectableItemBackground"-->
+            <!--android:gravity="center">-->
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:id="@+id/image_choose"
-                android:background="@mipmap/choose"/>
+            <!--<ImageView-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:id="@+id/image_make_run"-->
+                <!--android:background="@mipmap/make_run"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_choose"
-                android:text="@string/choose"
-                android:textSize="12sp"
-                android:textColor="@color/color_757575"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/text_make_run"-->
+                <!--android:text="@string/make_run"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textColor="@color/color_757575"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:id="@+id/choose"-->
+            <!--android:background="?android:attr/selectableItemBackground"-->
+            <!--android:gravity="center">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:id="@+id/image_choose"-->
+                <!--android:background="@mipmap/choose"/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/text_choose"-->
+                <!--android:text="@string/choose"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textColor="@color/color_757575"/>-->
+
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="0dp"

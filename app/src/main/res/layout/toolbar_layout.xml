@@ -25,7 +25,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/title"
                 android:layout_gravity="center"
-                android:text="@string/courses"
+                android:lines="1"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:text="@string/app_name"
                 android:textSize="20sp"
                 android:textColor="@color/color_fafafa"/>
 

@@ -60,9 +60,11 @@ public class Courses extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_courses, container, false);
         initViews();
-        Document document = Jsoup.parse(course);
-        title.setText(getTitle(document));
-        setCourses(manageCourses(getCourses(document)));
+        if(course != null && !course.equals("course is null")){
+            Document document = Jsoup.parse(course);
+            title.setText(getTitle(document));
+            setCourses(manageCourses(getCourses(document)));
+        }
         return view;
     }
 
@@ -171,6 +173,7 @@ public class Courses extends Fragment {
         app = (App)getActivity().getApplication();Intent intent;
         if ((intent = getActivity().getIntent()) != null) {
             course = intent.getStringExtra("content");
+            Log.e("course", course);
         }
     }
 

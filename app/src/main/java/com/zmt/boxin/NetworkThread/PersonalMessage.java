@@ -19,21 +19,20 @@ public class PersonalMessage implements Runnable{
     private String url;
     private Handler handler;
     private App app;
-    private String courses;
+    private String content;
 
-    public PersonalMessage(String url, Handler handler, App app, String courses) {
+    public PersonalMessage(String url, Handler handler, App app, String content) {
         this.url = url;
         this.handler = handler;
         this.app = app;
-        this.courses = courses;
+        this.content = content;
     }
-
 
     @Override
     public void run() {
         OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         String result = okHttpUtils.getMessageByGet();
-        Message msg = new Message();
+        Message msg = Message.obtain();
         switch (result){
             case "error" :
             case "fail" :
@@ -60,7 +59,7 @@ public class PersonalMessage implements Runnable{
                 app.getUser().setMajor(major.text());
                 app.getUser().setClasses(classes.text());
                 app.getUser().setImageUrl(new RequestUrl().getIP() + imageSuffix);
-                msg.obj = courses;
+                msg.obj = content;
                 handler.sendMessage(msg);
                 break;
         }

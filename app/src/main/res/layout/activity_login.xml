@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/password"
                     android:hint="@string/password"
-                    android:singleLine="true"/>
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/checkCodeText"
                         android:hint="@string/checkCode"
-                        android:singleLine="true" />
+                        android:maxLines="1" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -112,7 +112,7 @@
     <!--<android.support.design.widget.CoordinatorLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentBottom="release"-->
         <!--android:id="@+id/coordinatorLayout">-->
 
     <!--</android.support.design.widget.CoordinatorLayout>-->

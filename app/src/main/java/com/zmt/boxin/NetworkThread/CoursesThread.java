@@ -26,15 +26,14 @@ public class CoursesThread implements Runnable{
         OkHttpUtils okHttpUtils = new OkHttpUtils(url, app.getUser().getCookie());
         String content = okHttpUtils.getMessageByGet();
         switch (content){
-            case "error" :
-                handler.sendEmptyMessage(0x222);
-                break;
             case "fail" :
                 handler.sendEmptyMessage(0x333);
                 break;
             case "no evaluate" :
                 handler.sendEmptyMessage(0x444);
                 break;
+            case "error" :
+                content = "course is null";
             default :
                 /**
                  * 获取个人信息页面

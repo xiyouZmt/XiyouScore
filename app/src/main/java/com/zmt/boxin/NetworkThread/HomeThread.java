@@ -49,6 +49,14 @@ public class HomeThread implements Runnable{
                 CoursesThread coursesThread = new CoursesThread(url.getCoursesUrl(), handler, app);
                 Thread t = new Thread(coursesThread, "CoursesThread");
                 t.start();
+
+//                /**
+//                 * 获取个人信息页面
+//                 */
+//                RequestUrl url = new RequestUrl(app.getUser().getName(), app.getUser().getNumber());
+//                PersonalMessage pThread = new PersonalMessage(url.getMessageUrl(), handler, app, );
+//                Thread pc = new Thread(pThread, "PersonalMessage");
+//                pc.start();
                 break;
         }
     }

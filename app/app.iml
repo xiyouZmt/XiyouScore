@@ -130,12 +130,10 @@
     <orderEntry type="library" exported="" name="support-core-ui-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="jsoup-1.9.2" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="AMap2DMap_2.9.3_AMapLocation_3.2.0_20161205" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="AMap_Location_V3.2.0_20161205" level="project" />
     <orderEntry type="library" exported="" name="eventbus-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="autolayout-1.4.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-24.2.1" level="project" />

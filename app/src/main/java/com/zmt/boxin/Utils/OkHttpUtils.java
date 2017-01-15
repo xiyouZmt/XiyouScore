@@ -105,6 +105,7 @@ public class OkHttpUtils {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         builder.add("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz61IGQDPAm6cyppI+uTzQcI8sEH6Q==")
                 .add("txtUserName", number)
+                .add("Textbox1", "")
                 .add("TextBox2", password)
                 .add("txtSecretCode", checkCode)
                 .add("RadioButtonList1", "学生")
@@ -128,20 +129,13 @@ public class OkHttpUtils {
     }
 
     public String getHomeByGet(){
-        StringBuilder content = new StringBuilder();
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setFollowRedirects(false);
         Request request = new Request.Builder().url(url).addHeader("Cookie", cookie).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
             if(response.code() == 200){
-                BufferedReader reader = new BufferedReader(response.body().charStream());
-                String line;
-                while ((line = reader.readLine()) != null){
-                    content.append(line);
-                }
-                reader.close();
-                return content.toString();
+                return response.body().string();
             } else {
                 return "fail";
             }
@@ -289,6 +283,23 @@ public class OkHttpUtils {
             return file1.getPath();
         } catch (IOException e) {
             Log.e("getImageError--->", e.toString());
+            return "error";
+        }
+    }
+
+    public String getNewsData(){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setFollowRedirects(false);
+        Request request = new Request.Builder().url(url).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                return response.body().string();
+            } else {
+                return "fail";
+            }
+        } catch (IOException e) {
+            Log.e("getHTML error", e.toString());
             return "error";
         }
     }

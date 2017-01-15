@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             String pwd = sharedPreferences.getString("password", "");
             username.setText(name);
             password.setText(pwd);
+            checkbox.setChecked(true);
         }
 
         /**
@@ -79,14 +80,18 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public final Handler handler = new Handler(){
+    private final Handler handler = new Handler(){
         public void handleMessage(Message msg){
-            Intent intent = new Intent();
+            Intent intent = new Intent(); 
             switch (msg.what){
                 case 0x000 :
                     Snackbar.make(login, "登陆成功!", Snackbar.LENGTH_SHORT).show();
                     intent.setClass(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("content", msg.obj.toString());
+                    if(msg.obj != null){
+                        intent.putExtra("content", msg.obj.toString());
+                    } else {
+                        intent.putExtra("content", "course is null");
+                    }
                     startActivity(intent);
                     progressdialog.dismiss();
                     break;

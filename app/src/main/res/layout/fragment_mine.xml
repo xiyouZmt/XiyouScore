@@ -95,55 +95,25 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@color/color_dddddd"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:background="@color/color_fafafa">
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/run_note"
-            android:background="?android:attr/selectableItemBackground">
-
-            <TextView
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="跑步记录"
-                android:textSize="16sp"
-                android:textColor="@color/color_212121"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_centerVertical="true"
-                android:background="@mipmap/run_note"/>
-
-        </RelativeLayout>
-
-        <ImageView
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/color_999999"/>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/score"
             android:background="?android:attr/selectableItemBackground">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="70dp"
                 android:text="成绩单"
                 android:textSize="16sp"
                 android:textColor="@color/color_212121"/>
@@ -157,29 +127,21 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:background="@color/color_dddddd"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/color_dddddd"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:background="@color/color_fafafa">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:id="@+id/training_plan"
             android:background="?android:attr/selectableItemBackground">
 
@@ -193,53 +155,30 @@
             <TextView
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="70dp"
                 android:text="@string/train_plan"
                 android:textSize="16sp"
                 android:textColor="@color/color_212121"/>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/training_plan_test"
-            android:background="?android:attr/selectableItemBackground">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:background="@mipmap/right"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/color_dddddd"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/color_dddddd"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:background="@color/color_fafafa">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:id="@+id/settings"
             android:background="?android:attr/selectableItemBackground">
 
@@ -253,31 +192,15 @@
             <TextView
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="70dp"
                 android:text="设置"
                 android:textSize="16sp"
                 android:textColor="@color/color_212121"/>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/settings_test"
-            android:background="?android:attr/selectableItemBackground">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:background="@mipmap/right"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"

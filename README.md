@@ -8,7 +8,7 @@
 
 ### 2.POST请求 http://222.24.19.201/default2.aspx 请求体加上9对键值对
 
-1) ("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz61IGQDPAm6cyppI+uTzQcI8sEH6Q==")
+1) ("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz40VgXJB8DXjui8rTCUMZ5zS6eY7w==")
 
 2) ("txtUserName", value1)， value1为学号
 

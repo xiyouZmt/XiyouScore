@@ -2,8 +2,10 @@ package com.zmt.boxin.Fragment.ScoreFragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -30,6 +32,7 @@ import com.zmt.boxin.Utils.RequestUrl;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

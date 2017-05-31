@@ -25,13 +25,15 @@ public class OkHttpUtils {
     private String number;
     private String password;
     private String checkCode;
+    private String viewState;
     private String cookie;
 
-    public OkHttpUtils(String url, String number, String password, String checkCode, String cookie) {
+    public OkHttpUtils(String url, String number, String password, String checkCode, String viewState, String cookie) {
         this.url = url;
         this.number = number;
         this.password = password;
         this.checkCode = checkCode;
+        this.viewState = viewState;
         this.cookie = cookie;
     }
 
@@ -96,6 +98,23 @@ public class OkHttpUtils {
         }
     }
 
+    public String getViewState(){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setFollowRedirects(false);
+        Request request = new Request.Builder().url(url).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if(response.code() == 200){
+                return response.body().string();
+            } else {
+                return "error";
+            }
+        } catch (IOException e) {
+            Log.e("getHtml error", e.toString());
+            return "fail";
+        }
+    }
+
     public String getDataByPost(){
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setFollowRedirects(false);
@@ -103,7 +122,7 @@ public class OkHttpUtils {
          * 请求体
          */
         FormEncodingBuilder builder = new FormEncodingBuilder();
-        builder.add("__VIEWSTATE", "dDwtNTE2MjI4MTQ7Oz61IGQDPAm6cyppI+uTzQcI8sEH6Q==")
+        builder.add("__VIEWSTATE", viewState)
                 .add("txtUserName", number)
                 .add("Textbox1", "")
                 .add("TextBox2", password)
@@ -140,7 +159,7 @@ public class OkHttpUtils {
                 return "fail";
             }
         } catch (IOException e) {
-            Log.e("getHTML error", e.toString());
+            Log.e("getHtml error", e.toString());
             return "fail";
         }
     }

@@ -46,6 +46,7 @@ public class SettingActivity extends AppCompatActivity {
             case R.id.clean :
                 break;
             case R.id.update :
+
                 break;
             case R.id.suggestion :
                 intent.setClass(SettingActivity.this, SuggestActivity.class);

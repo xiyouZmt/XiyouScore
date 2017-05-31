@@ -60,7 +60,7 @@ public class FailedPassAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder{
+    static class ViewHolder{
         @BindView(R.id.courseName)
         TextView courseName;
         @BindView(R.id.property)

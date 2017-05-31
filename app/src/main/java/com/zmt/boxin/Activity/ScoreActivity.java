@@ -2,6 +2,7 @@ package com.zmt.boxin.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -143,7 +144,6 @@ public class ScoreActivity extends AppCompatActivity {
                             bundle.putString(YEAR, year);
                             bundle.putInt(CourseScore.PHYSICAL_TEST_ITEM_POSITION, position);
                             bundle.putString("meaScoreId", physicalTestMap.get(terms[position]));
-
                             EventBus.getDefault().post(bundle);
                         }
                     }

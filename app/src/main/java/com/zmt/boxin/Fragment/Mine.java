@@ -52,12 +52,9 @@ public class Mine extends android.support.v4.app.Fragment {
     @BindView(R.id.colleague) TextView colleague;
     @BindView(R.id.sex) ImageView sex;
     @BindView(R.id.QR_Code) ImageView QR_code;
-    @BindView(R.id.run_note) RelativeLayout run_note;
     @BindView(R.id.score) RelativeLayout score;
     @BindView(R.id.training_plan) RelativeLayout training_plan;
-    @BindView(R.id.training_plan_test) RelativeLayout training_plan_test;
     @BindView(R.id.settings) RelativeLayout settings;
-    @BindView(R.id.settings_test) RelativeLayout settings_test;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -111,7 +108,7 @@ public class Mine extends android.support.v4.app.Fragment {
         }
     };
 
-    @OnClick({R.id.personal, R.id.QR_Code, R.id.run_note, R.id.score, R.id.training_plan, R.id.training_plan_test, R.id.settings, R.id.settings_test})
+    @OnClick({R.id.personal, R.id.QR_Code, R.id.score, R.id.training_plan, R.id.settings})
     public void onClick(View v){
         Intent intent = new Intent();
         switch (v.getId()){
@@ -148,14 +145,11 @@ public class Mine extends android.support.v4.app.Fragment {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setView(QR_Code_Window).create().show();
                 break;
-            case R.id.run_note :
-                break;
             case R.id.score :
                 intent.setClass(getActivity(), ScoreActivity.class);
                 startActivity(intent);
                 break;
             case R.id.training_plan:
-            case R.id.training_plan_test :
                 if(app.getUser().getTrainCoursesList().size() == 0){
                     progressDialog.show();
                     DefaultTrain defaultTrain = new DefaultTrain(url.getTrainPlan(), handler, app);
@@ -167,7 +161,6 @@ public class Mine extends android.support.v4.app.Fragment {
                 }
                 break;
             case R.id.settings :
-            case R.id.settings_test :
                 intent.setClass(getActivity(), SettingActivity.class);
                 startActivity(intent);
                 break;

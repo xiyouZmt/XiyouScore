@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.zmt.boxin.Application.App;
 import com.zmt.boxin.NetworkThread.GetSession;
 import com.zmt.boxin.NetworkThread.IdentifyThread;
+import com.zmt.boxin.NetworkThread.ViewStateThread;
 import com.zmt.boxin.R;
 import com.zmt.boxin.View.ClearEditText;
 import com.zmt.boxin.Utils.IsConnected;
@@ -40,15 +41,15 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private final String rootPath = Environment.getExternalStorageDirectory() + "/";
+    private ProgressDialog progressdialog;
+    private App app;
     @BindView(R.id.login) Button login;
     @BindView(R.id.remember) CheckBox checkbox;
     @BindView(R.id.username) ClearEditText username;
     @BindView(R.id.password) PasswordEditText password;
     @BindView(R.id.checkCodeText) ClearEditText checkCodeText;
     @BindView(R.id.checkCode) ImageView checkCodeView;
-    private App app;
-    private ProgressDialog progressdialog;
-    private final String rootPath = Environment.getExternalStorageDirectory() + "/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     startActivity(intent);
                     progressdialog.dismiss();
+                    finish();
                     break;
                 case 0x001 :
                     String checkCodePath = rootPath + "/Boxin/Images/checkCode.png";
@@ -160,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         progressdialog.show();
                         RequestUrl url = new RequestUrl();
-                        GetSession thread = new GetSession(url.getCookieUrl(), number, pwd, checkCode, handler, app);
+                        ViewStateThread thread = new ViewStateThread(url.getIP(), number, pwd, checkCode, app, handler);
                         Thread t = new Thread(thread, "NetWorkThread");
                         t.start();
                     }

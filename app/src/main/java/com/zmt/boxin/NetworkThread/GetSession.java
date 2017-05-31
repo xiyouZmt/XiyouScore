@@ -15,21 +15,23 @@ public class GetSession implements Runnable{
     private String number;
     private String password;
     private String checkCode;
+    private String viewState;
     private Handler handler;
     private App app;
 
-    public GetSession(String url, String number, String password, String checkCode, Handler handler, App app) {
+    public GetSession(String url, String number, String password, String checkCode, String viewState, Handler handler, App app) {
         this.url = url;
         this.number = number;
         this.password = password;
         this.checkCode = checkCode;
+        this.viewState = viewState;
         this.handler = handler;
         this.app = app;
     }
 
     @Override
     public void run() {
-        OkHttpUtils okHttpUtils = new OkHttpUtils(url, number, password, checkCode, app.getUser().getCookie());
+        OkHttpUtils okHttpUtils = new OkHttpUtils(url, number, password, checkCode, viewState,  app.getUser().getCookie());
         String result = okHttpUtils.getDataByPost();
         switch (result){
             case "error" :

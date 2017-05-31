@@ -27,7 +27,16 @@ public class User implements Serializable {
     private String trainValue = "";
     private String currentTerm = "";
     private String scoreYear = "";
+    private String _VIEWSTATE = "";
     private int scoreTerm;
+
+    public String get_VIEWSTATE() {
+        return _VIEWSTATE;
+    }
+
+    public void set_VIEWSTATE(String _VIEWSTATE) {
+        this._VIEWSTATE = _VIEWSTATE;
+    }
 
     public String getScoreYear() {
         return scoreYear;

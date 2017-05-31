@@ -17,30 +17,30 @@
         android:textSize="12sp"
         android:textColor="@color/color_000000"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/suggestText_a"
-        android:id="@+id/suggestRelative"
-        android:background="@drawable/shape">
-
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:id="@+id/suggest_content"
-            android:hint="请留下您的宝贵意见,我们将不断完善,谢谢!"
-            android:textColorHint="@color/color_111111"
-            android:textSize="12sp"
-            android:textStyle="italic"/>
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/suggestText_a"
+            android:id="@+id/suggestRelative"
+            android:background="@drawable/shape">
 
-    </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:id="@+id/suggest_content"
+                android:hint="请留下您的宝贵意见,我们将不断完善,谢谢!"
+                android:textColorHint="@color/color_111111"
+                android:textSize="12sp"
+                android:textStyle="italic"/>
+
+        </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"

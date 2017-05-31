@@ -1,5 +1,6 @@
 package com.zmt.boxin.Activity;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,8 +11,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,12 +20,9 @@ import android.widget.TextView;
 
 import com.zhy.autolayout.AutoLayoutActivity;
 import com.zmt.boxin.Application.App;
-import com.zmt.boxin.Fragment.ChooseCourse;
 import com.zmt.boxin.Fragment.Courses;
 import com.zmt.boxin.Fragment.HomeFragment;
-import com.zmt.boxin.Fragment.MakeRun;
 import com.zmt.boxin.Fragment.Mine;
-import com.zmt.boxin.Fragment.Run;
 import com.zmt.boxin.R;
 
 import java.util.ArrayList;
@@ -40,24 +38,15 @@ public class MainActivity extends AutoLayoutActivity {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.home) LinearLayout linear_home;
     @BindView(R.id.courses) LinearLayout linear_courses;
-//    @BindView(R.id.run) LinearLayout linear_run;
-//    @BindView(R.id.choose) LinearLayout linear_choose;
     @BindView(R.id.mine) LinearLayout linear_mine;
     @BindView(R.id.image_home) ImageView image_home;
     @BindView(R.id.image_courses) ImageView image_courses;
-//    @BindView(R.id.image_run) ImageView image_run;
-//    @BindView(R.id.image_make_run) ImageView image_make_run;
-//    @BindView(R.id.image_choose) ImageView image_choose;
     @BindView(R.id.image_mine) ImageView image_mine;
     @BindView(R.id.text_home) TextView text_home;
     @BindView(R.id.text_courses) TextView text_courses;
-//    @BindView(R.id.text_run) TextView text_run;
-//    @BindView(R.id.text_make_run) TextView text_make_run;
-//    @BindView(R.id.text_choose) TextView text_choose;
     @BindView(R.id.text_mine) TextView text_mine;
     @BindView(R.id.viewPager) ViewPager viewPager;
     @BindView(R.id.container) CoordinatorLayout coordinatorLayout;
-
     private App app;
     private List<Fragment> fragmentList;
     private long exitTime = 0;
@@ -80,6 +69,17 @@ public class MainActivity extends AutoLayoutActivity {
         };
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new PageChangeListener());
+
+        final int start = 100;
+        final int deltaX = 100;
+        final ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 1).setDuration(1000);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float fraction = valueAnimator.getAnimatedFraction();
+                title.scrollTo(start + (int)(fraction * deltaX), 0);
+            }
+        });
     }
 
     public class PageChangeListener implements ViewPager.OnPageChangeListener{
@@ -171,19 +171,10 @@ public class MainActivity extends AutoLayoutActivity {
         fragmentList = new ArrayList<>();
         HomeFragment homeFragment = new HomeFragment();
         Courses courses = new Courses();
-//        Run run = new Run();
-//        MakeRun makeRun = new MakeRun();
-//        ChooseCourse chooseCourse = new ChooseCourse();
         Mine mine = new Mine();
         fragmentList.add(homeFragment);
         fragmentList.add(courses);
-//        fragmentList.add(run);
-//        fragmentList.add(makeRun);
-//        fragmentList.add(chooseCourse);
         fragmentList.add(mine);
-//        toolbar.setNavigationIcon(R.mipmap.menu);
-//        toolbar.setLogo(R.mipmap.ic_launcher);
-//        toolbar.setTitleTextColor(getResources().getColor(R.color.color_fafafa));
         toolbar.setTitle("");
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -207,24 +198,6 @@ public class MainActivity extends AutoLayoutActivity {
         });
         setSupportActionBar(toolbar);
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_toolbar, null);
-//        menuItem = menu.findItem(R.id.add);
-//        menuItem.setVisible(false);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.add :
-//
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
